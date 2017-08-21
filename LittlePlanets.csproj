@@ -78,8 +78,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Branoscript.cs" />
     <Compile Include="Assets\Coords.cs" />
-    <Compile Include="Assets\MrackoScript.cs" />
     <Compile Include="Assets\PlayerController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
