@@ -9,10 +9,12 @@ public class Branoscript : MonoBehaviour {
 
     private bool _aktivniBrana = false;
     private SpriteRenderer _spriteRenderer;
+    private Runoscript[] _runy;
 
-	void Start () {
+    void Start () {
         Kniha.SetActive(false);
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _runy = GetComponentsInChildren<Runoscript>(true);
 	}
 	
 	void Update () {
@@ -26,7 +28,7 @@ public class Branoscript : MonoBehaviour {
                 // Toglovani otevirani a zavirani knihy - pouze sprite
                 if (Kniha.activeInHierarchy)
                 {
-                    Kniha.SetActive(false);
+                    ZavriKnihu();
                 }
                 else
                 {
@@ -34,6 +36,11 @@ public class Branoscript : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("AAAA");
     }
 
     // Kdyz se trigne kolize (s hracem)
@@ -48,6 +55,16 @@ public class Branoscript : MonoBehaviour {
     {
         _spriteRenderer.sprite = DefaultBrana;
         _aktivniBrana = false;
+        ZavriKnihu();
+    }
+
+    private void ZavriKnihu()
+    {
+        
         Kniha.SetActive(false);
+        for (int i = 0; i < _runy.Length; i++)
+        {
+            _runy[i].SmazRunu();
+        }
     }
 }
