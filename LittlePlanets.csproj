@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Branoscript.cs" />
+    <Compile Include="Assets\Branosystem.cs" />
     <Compile Include="Assets\Coords.cs" />
     <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\Runoscript.cs" />

@@ -6,18 +6,61 @@ public class Branoscript : MonoBehaviour {
     public GameObject Kniha;
     public Sprite DefaultBrana;
     public Sprite AktivniBrana;
+    public string Adresa;
+    public Branosystem BranoSystem;
+    public string Scena;
 
+    private string _aktualniAdresa;
     private bool _aktivniBrana = false;
     private SpriteRenderer _spriteRenderer;
     private Runoscript[] _runy;
 
-    void Start () {
+    ///////////////
+    /// PUBLIC ///
+    ///////////////
+    public bool ZapisRunu(string runa)
+    {
+        if (_aktualniAdresa.Length < 3)
+        {
+            _aktualniAdresa += runa;
+            return true;
+        }
+
+        if (_aktualniAdresa.Length == 3)
+        {
+            if (_aktualniAdresa == Adresa)
+            {
+                ResetniKnihu();
+                return false;
+            }
+
+            BranoSystem.VytocBranu(_aktualniAdresa, this);
+        }
+
+        return false;
+    }
+
+    public void ResetniKnihu()
+    {
+        _aktualniAdresa = "";
+        for (int i = 0; i < _runy.Length; i++)
+        {
+            _runy[i].SmazRunu();
+        }
+    }
+
+    ///////////////
+    /// PRIVATE ///
+    ///////////////
+    private void Start () {
         Kniha.SetActive(false);
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _runy = GetComponentsInChildren<Runoscript>(true);
+        _aktualniAdresa = "";
+        Debug.Log(Scena);
 	}
 	
-	void Update () {
+	private void Update () {
         if (Input.GetMouseButtonDown(0) && _aktivniBrana) {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
@@ -38,11 +81,6 @@ public class Branoscript : MonoBehaviour {
         }
     }
 
-    private void OnMouseDown()
-    {
-        Debug.Log("AAAA");
-    }
-
     // Kdyz se trigne kolize (s hracem)
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -50,7 +88,6 @@ public class Branoscript : MonoBehaviour {
         _aktivniBrana = true;
     }
 
-    // Kdyz se leavne kolize (s hracem)
     private void OnTriggerExit2D(Collider2D collision)
     {
         _spriteRenderer.sprite = DefaultBrana;
@@ -60,11 +97,7 @@ public class Branoscript : MonoBehaviour {
 
     private void ZavriKnihu()
     {
-        
+        ResetniKnihu();
         Kniha.SetActive(false);
-        for (int i = 0; i < _runy.Length; i++)
-        {
-            _runy[i].SmazRunu();
-        }
     }
 }
