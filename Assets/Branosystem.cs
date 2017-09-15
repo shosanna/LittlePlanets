@@ -12,6 +12,12 @@ public class Branosystem : MonoBehaviour {
 
     private void Start()
     {
+        if (PlayerPrefs.GetInt("play_success") == 1)
+        {
+            AudioSource.PlayClipAtPoint(ZvukUspech, Camera.main.transform.position);
+            PlayerPrefs.DeleteKey("play_success");
+        }
+
         for (int i = 0; i < Adresy.Length; i++)
         {
             _adresy[Adresy[i].Adresa] = Adresy[i].Scena;
@@ -23,7 +29,8 @@ public class Branosystem : MonoBehaviour {
         Debug.Log(adresa);
         if(_adresy.ContainsKey(adresa))
         {
-            AudioSource.PlayClipAtPoint(ZvukUspech, Camera.main.transform.position);
+            PlayerPrefs.SetInt("play_success", 1);
+        
             brana.ResetniKnihu();
             Application.LoadLevel(_adresy[adresa]);
         } else

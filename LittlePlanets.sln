@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittlePlanets", "LittlePlanets.csproj", "{A519E2D2-0A32-9B6A-1506-93237147716D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittlePlanets.Editor", "LittlePlanets.Editor.csproj", "{294D432C-91CA-8483-5E8B-6B8D6115BCF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{A519E2D2-0A32-9B6A-1506-93237147716D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A519E2D2-0A32-9B6A-1506-93237147716D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A519E2D2-0A32-9B6A-1506-93237147716D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{294D432C-91CA-8483-5E8B-6B8D6115BCF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{294D432C-91CA-8483-5E8B-6B8D6115BCF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{294D432C-91CA-8483-5E8B-6B8D6115BCF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{294D432C-91CA-8483-5E8B-6B8D6115BCF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

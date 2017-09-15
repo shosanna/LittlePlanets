@@ -23,6 +23,7 @@ public class Branoscript : MonoBehaviour {
         if (_aktualniAdresa.Length < 3)
         {
             _aktualniAdresa += runa;
+
             return true;
         }
 
