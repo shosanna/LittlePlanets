@@ -12,6 +12,7 @@ public class Branosystem : MonoBehaviour {
 
     private void Start()
     {
+        // uspesne dialovani z predchozi sceny - zvuk
         if (PlayerPrefs.GetInt("play_success") == 1)
         {
             AudioSource.PlayClipAtPoint(ZvukUspech, Camera.main.transform.position);
@@ -26,7 +27,6 @@ public class Branosystem : MonoBehaviour {
 
     public void VytocBranu(string adresa, Branoscript brana)
     {
-        Debug.Log(adresa);
         if(_adresy.ContainsKey(adresa))
         {
             PlayerPrefs.SetInt("play_success", 1);

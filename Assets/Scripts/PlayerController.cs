@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    private SpriteRenderer _renderer;
+    //private SpriteRenderer _renderer;
     private Animator _anim;
 
     public Transform cameraTransform;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
     private void Start()
     {
         PolarCoord = new PolarCoord(1, Radius);
-        _renderer = GetComponent<SpriteRenderer>();
+        //_renderer = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
     }
 

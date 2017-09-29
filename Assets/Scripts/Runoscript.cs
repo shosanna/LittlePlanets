@@ -28,9 +28,14 @@ public class Runoscript : MonoBehaviour {
 
         if (vysledek)
         {
-            _spriteRenderer.sprite = AktivniRuna;
-            AudioSource.PlayClipAtPoint(RunoZvuk, Camera.main.transform.position);
+            RunaZmacknuta();
         }
+    }
+
+    public void RunaZmacknuta()
+    {
+        _spriteRenderer.sprite = AktivniRuna;
+        AudioSource.PlayClipAtPoint(RunoZvuk, Camera.main.transform.position);
     }
 
     public void SmazRunu()
