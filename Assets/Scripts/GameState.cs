@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour {
     public bool RunTutorial = true;
+    public bool BranaUspesneVytocena = false;
 
     private static GameState _instance = null;
 
