@@ -14,6 +14,7 @@ public class Branoscript : MonoBehaviour {
     private bool _aktivniBrana = false;
     private SpriteRenderer _spriteRenderer;
     private Runoscript[] _runy;
+    private GameState _gameState;
 
     ///////////////
     /// PUBLIC ///
@@ -61,7 +62,7 @@ public class Branoscript : MonoBehaviour {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _runy = GetComponentsInChildren<Runoscript>(true);
         _aktualniAdresa = "";
-        Debug.Log(Scena);
+        _gameState = GameState.Instance;
 	}
 	
 	private void Update () {
@@ -112,7 +113,11 @@ public class Branoscript : MonoBehaviour {
     // Kdyz se trigne kolize (s hracem)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Fungus.Flowchart.BroadcastFungusMessage("SpustBranoNapovedu");
+        if (_gameState.RunTutorial == true)
+        {
+            Fungus.Flowchart.BroadcastFungusMessage("SpustBranoNapovedu");
+            _gameState.RunTutorial = false;
+        }
 
         _spriteRenderer.sprite = AktivniBrana;
         _aktivniBrana = true;

@@ -16,11 +16,6 @@ public class Runoscript : MonoBehaviour {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _branoscript = GetComponentInParent<Branoscript>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void OnMouseDown()
     {
@@ -35,7 +30,7 @@ public class Runoscript : MonoBehaviour {
     public void RunaZmacknuta()
     {
         _spriteRenderer.sprite = AktivniRuna;
-        AudioSource.PlayClipAtPoint(RunoZvuk, Camera.main.transform.position);
+        AudioSource.PlayClipAtPoint(RunoZvuk, Camera.main.transform.position, 0.05f);
     }
 
     public void SmazRunu()

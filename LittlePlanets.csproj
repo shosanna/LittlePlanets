@@ -552,6 +552,7 @@
     <Compile Include="Assets\Scripts\Branoscript.cs" />
     <Compile Include="Assets\Scripts\Branosystem.cs" />
     <Compile Include="Assets\Scripts\Coords.cs" />
+    <Compile Include="Assets\Scripts\GameState.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Runoscript.cs" />
   </ItemGroup>

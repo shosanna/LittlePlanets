@@ -13,10 +13,10 @@ public class Branosystem : MonoBehaviour {
     private void Start()
     {
         // uspesne dialovani z predchozi sceny - zvuk
-        if (PlayerPrefs.GetInt("play_success") == 1)
+        if (PlayerPrefs.GetInt("dial_success") == 1)
         {
-            AudioSource.PlayClipAtPoint(ZvukUspech, Camera.main.transform.position);
-            PlayerPrefs.DeleteKey("play_success");
+            AudioSource.PlayClipAtPoint(ZvukUspech, Camera.main.transform.position, 0.05f);
+            PlayerPrefs.DeleteKey("dial_success");
         }
 
         for (int i = 0; i < Adresy.Length; i++)
@@ -29,13 +29,13 @@ public class Branosystem : MonoBehaviour {
     {
         if(_adresy.ContainsKey(adresa))
         {
-            PlayerPrefs.SetInt("play_success", 1);
+            PlayerPrefs.SetInt("dial_success", 1);
         
             brana.ResetniKnihu();
             Application.LoadLevel(_adresy[adresa]);
         } else
         {
-            AudioSource.PlayClipAtPoint(ZvukFail, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(ZvukFail, Camera.main.transform.position.normalized, 0.05f);
             brana.ResetniKnihu();
         }
     }
