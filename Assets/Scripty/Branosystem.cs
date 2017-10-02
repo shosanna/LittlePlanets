@@ -17,8 +17,6 @@ public class Branosystem : MonoBehaviour {
         {
             AudioSource.PlayClipAtPoint(ZvukUspech, Camera.main.transform.position, 0.05f);
             GameState.Instance.BranaUspesneVytocena = false;
-
-            Camera.main.GetComponent<Zatemnovac>().Material.SetFloat("_Magnitude", 0.5f);
         }
 
         for (int i = 0; i < Adresy.Length; i++)
