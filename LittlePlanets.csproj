@@ -549,12 +549,13 @@
     <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Scripts\SfxrSynth.cs" />
     <Compile Include="Assets\Fungus\Thirdparty\iTween\iTween.cs" />
     <Compile Include="Assets\FungusExamples\FungusLua\Bindings\CustomScript.cs" />
-    <Compile Include="Assets\Scripts\Branoscript.cs" />
-    <Compile Include="Assets\Scripts\Branosystem.cs" />
-    <Compile Include="Assets\Scripts\Coords.cs" />
-    <Compile Include="Assets\Scripts\GameState.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Runoscript.cs" />
+    <Compile Include="Assets\Scripty\Branoscript.cs" />
+    <Compile Include="Assets\Scripty\Branosystem.cs" />
+    <Compile Include="Assets\Scripty\Coords.cs" />
+    <Compile Include="Assets\Scripty\GameState.cs" />
+    <Compile Include="Assets\Scripty\PlayerController.cs" />
+    <Compile Include="Assets\Scripty\Runoscript.cs" />
+    <Compile Include="Assets\Scripty\Zatemnovac.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fungus\Docs\CHANGELOG.txt" />
@@ -581,6 +582,7 @@
     <None Include="Assets\FungusExamples\FungusTown\Readme.txt" />
     <None Include="Assets\FungusExamples\Sherlock\Readme.txt" />
     <None Include="Assets\FungusExamples\TheFacility\Fonts\aleo\SIL Open Font License.txt" />
+    <None Include="Assets\Materialy a shadery\NocniShader.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
