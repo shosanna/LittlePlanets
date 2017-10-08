@@ -15,15 +15,9 @@ public class GameState : MonoBehaviour {
 
     // Casovac
     private float _ubehlyCas = 0f;
-    private float _delkaDne = 12f;
+    private float _delkaDne = 200f;
 
-
-    // UI Casovac
-    private GameObject _rucickaCasovace;
-    private float _horniMezRucicky = 349f;
-    private float _dolniMezRucicky = 222f;
-    private float _rozsahRucicky;
-    private float _procentoDne = 0f;
+    public float ProcentoDne = 0f;
 
     public static GameState Instance
     {
@@ -31,20 +25,19 @@ public class GameState : MonoBehaviour {
     }
 
     void Start () {
-        // Run the tutorial only for the first time
-		if (RunTutorial == true)
+        // Tutorial se spousti jen prvne
+        if (RunTutorial == true)
         {
             Fungus.Flowchart.BroadcastFungusMessage("SpustIntroNapovedu");
         }
 
+        // Hudba
         GetComponent<AudioSource>().Play();
-        _rucickaCasovace = GameObject.FindGameObjectWithTag("RucickaCasovace");
-        _rozsahRucicky = _horniMezRucicky - _dolniMezRucicky;
     }
 
     void Awake()
     {
-        // Immidiately destroy any other instance of game state - it must be only one (the first one)
+        // Hned znic jine instance GameState - tento musi byt unikantni (Singleton)
         if (_instance != null && _instance != this) {
             Destroy(this.gameObject);
             return;
@@ -52,43 +45,19 @@ public class GameState : MonoBehaviour {
             _instance = this;
         }
 
-        // Make the first game state live forever :)
+        // Tento GameState se nikdy neznici
         DontDestroyOnLoad(transform.gameObject);
     }
 
     private void Update()
     {
-
         // Casovac
         _ubehlyCas += Time.deltaTime;
-        _procentoDne = (float)Math.Round(_ubehlyCas / _delkaDne, 2);
+        ProcentoDne = (float)Math.Round(_ubehlyCas / _delkaDne, 2);
+    }
 
-        _rucickaCasovace.transform.localPosition = new Vector3(_rucickaCasovace.transform.localPosition.x,
-                                                _horniMezRucicky - (_procentoDne * _rozsahRucicky),
-                                                _rucickaCasovace.transform.localPosition.z);
- 
-        if (_procentoDne >= 0.9f)
-        {
-            Camera.main.GetComponent<Zatemnovac>().Material.SetFloat("_Magnitude", 0.4f);
-        } else if (_procentoDne >= 0.75f)
-        {
-            Camera.main.GetComponent<Zatemnovac>().Material.SetFloat("_Magnitude", 0.65f);
-        } else if (_procentoDne >= 0.6f)
-        {
-            Camera.main.GetComponent<Zatemnovac>().Material.SetFloat("_Magnitude", 0.85f);
-        } else
-        {
-            Camera.main.GetComponent<Zatemnovac>().Material.SetFloat("_Magnitude", 1f);
-        }
-        
-        // Konec dne!
-        if (_procentoDne >= 1)
-        {
-            _ubehlyCas = 0;
-            _rucickaCasovace.transform.localPosition = new Vector3(_rucickaCasovace.transform.localPosition.x,
-                                                   _horniMezRucicky,
-                                                   _rucickaCasovace.transform.localPosition.z);
-        }
-
+    public void KonecDne()
+    {
+        _ubehlyCas = 0;
     }
 }

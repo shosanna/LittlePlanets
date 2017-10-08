@@ -553,6 +553,7 @@
     <Compile Include="Assets\Scripty\Branosystem.cs" />
     <Compile Include="Assets\Scripty\Coords.cs" />
     <Compile Include="Assets\Scripty\GameState.cs" />
+    <Compile Include="Assets\Scripty\Planetascript.cs" />
     <Compile Include="Assets\Scripty\PlayerController.cs" />
     <Compile Include="Assets\Scripty\Runoscript.cs" />
     <Compile Include="Assets\Scripty\Zatemnovac.cs" />
