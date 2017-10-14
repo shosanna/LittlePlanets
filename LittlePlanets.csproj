@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.6.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -78,7 +80,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Destovac.cs" />
     <Compile Include="Assets\Fungus\Scripts\Commands\Break.cs" />
     <Compile Include="Assets\Fungus\Scripts\Commands\Call.cs" />
     <Compile Include="Assets\Fungus\Scripts\Commands\CallMethod.cs" />
@@ -553,6 +554,8 @@
     <Compile Include="Assets\Scripty\Branoscript.cs" />
     <Compile Include="Assets\Scripty\Branosystem.cs" />
     <Compile Include="Assets\Scripty\Coords.cs" />
+    <Compile Include="Assets\Scripty\Den.cs" />
+    <Compile Include="Assets\Scripty\Destovac.cs" />
     <Compile Include="Assets\Scripty\GameState.cs" />
     <Compile Include="Assets\Scripty\Planetascript.cs" />
     <Compile Include="Assets\Scripty\PlayerController.cs" />

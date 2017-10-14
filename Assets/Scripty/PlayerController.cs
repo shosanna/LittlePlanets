@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour {
     //private SpriteRenderer _renderer;
     private Animator _anim;
