@@ -15,9 +15,8 @@ public class GameState : MonoBehaviour {
 
     // Casovac
     private float _ubehlyCas = 0f;
-    private float _delkaDne = 200f;
-
-    public float ProcentoDne = 0f;
+    private float _delkaDne = 10f;
+    private float _procentoDne = 0f;
 
     public static GameState Instance
     {
@@ -32,7 +31,7 @@ public class GameState : MonoBehaviour {
         }
 
         // Hudba
-        GetComponent<AudioSource>().Play();
+        PustHudbu();
     }
 
     void Awake()
@@ -53,11 +52,32 @@ public class GameState : MonoBehaviour {
     {
         // Casovac
         _ubehlyCas += Time.deltaTime;
-        ProcentoDne = (float)Math.Round(_ubehlyCas / _delkaDne, 2);
+        _procentoDne = (float)Math.Round(_ubehlyCas / _delkaDne, 2);
     }
 
-    public void KonecDne()
+    public void NastavKonecDne()
     {
         _ubehlyCas = 0;
+        PustHudbu();
+    }
+
+    public float ProcentoDne()
+    {
+        return _procentoDne;
+    }
+
+    public void PustHudbu()
+    {
+        GetComponent<AudioSource>().Play();
+    }
+
+    public void ZastavHudbu()
+    {
+        GetComponent<AudioSource>().Stop();
+    }
+
+    public void ZtlumHudbu(float okolik)
+    {
+        GetComponent<AudioSource>().volume = okolik;
     }
 }

@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Destovac.cs" />
     <Compile Include="Assets\Fungus\Scripts\Commands\Break.cs" />
     <Compile Include="Assets\Fungus\Scripts\Commands\Call.cs" />
     <Compile Include="Assets\Fungus\Scripts\Commands\CallMethod.cs" />
@@ -583,6 +584,7 @@
     <None Include="Assets\FungusExamples\FungusTown\Readme.txt" />
     <None Include="Assets\FungusExamples\Sherlock\Readme.txt" />
     <None Include="Assets\FungusExamples\TheFacility\Fonts\aleo\SIL Open Font License.txt" />
+    <None Include="Assets\Materialy a shadery\DestShader.shader" />
     <None Include="Assets\Materialy a shadery\NocniShader.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
