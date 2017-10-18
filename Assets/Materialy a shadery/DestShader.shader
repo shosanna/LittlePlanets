@@ -46,9 +46,19 @@
 				fixed4 destoBarva = tex2D(_DestMapa, i.uv + 10 *_Time.xx);
 				fixed4 col = tex2D(_MainTex, i.uv);
 
+				float time = _Time.y;
+				int rounded_time = floor(time);
+				float diff = time - rounded_time;
+
 				if (destoBarva.r == 1 ) {
 					col = col + fixed4(0.3, 0.3, 0.3, 0);
 				}
+
+
+				if (diff < 0.002) {
+					col = fixed4(1, 1, 1, 1);
+				}
+
 				return col;
 			}
 			ENDCG

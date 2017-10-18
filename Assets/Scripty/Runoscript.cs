@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Runoscript : MonoBehaviour {
     public Sprite AktivniRuna;
     public Sprite DefaultRuna;
