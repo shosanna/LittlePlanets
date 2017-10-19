@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.6.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -551,16 +549,17 @@
     <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Scripts\SfxrSynth.cs" />
     <Compile Include="Assets\Fungus\Thirdparty\iTween\iTween.cs" />
     <Compile Include="Assets\FungusExamples\FungusLua\Bindings\CustomScript.cs" />
-    <Compile Include="Assets\Scripty\Branoscript.cs" />
-    <Compile Include="Assets\Scripty\Branosystem.cs" />
-    <Compile Include="Assets\Scripty\Coords.cs" />
+    <Compile Include="Assets\Scripty\Cestovani\Branoscript.cs" />
+    <Compile Include="Assets\Scripty\Cestovani\Branosystem.cs" />
+    <Compile Include="Assets\Scripty\Cestovani\Runoscript.cs" />
     <Compile Include="Assets\Scripty\Den.cs" />
-    <Compile Include="Assets\Scripty\Destovac.cs" />
+    <Compile Include="Assets\Scripty\Efekty\Destovac.cs" />
+    <Compile Include="Assets\Scripty\Efekty\Zatemnovac.cs" />
     <Compile Include="Assets\Scripty\GameState.cs" />
     <Compile Include="Assets\Scripty\Planetascript.cs" />
     <Compile Include="Assets\Scripty\PlayerController.cs" />
-    <Compile Include="Assets\Scripty\Runoscript.cs" />
-    <Compile Include="Assets\Scripty\Zatemnovac.cs" />
+    <Compile Include="Assets\Scripty\Stromoscript.cs" />
+    <Compile Include="Assets\Scripty\Utility\Coords.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fungus\Docs\CHANGELOG.txt" />

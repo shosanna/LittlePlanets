@@ -50,6 +50,12 @@ public class PlayerController : MonoBehaviour {
             _anim.SetTrigger("Jump");
         }
 
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            _anim.SetTrigger("Chop");
+        } 
+
+
         PolarCoord.R += yVelocity * Time.deltaTime;
         if (PolarCoord.R < Radius)
         {

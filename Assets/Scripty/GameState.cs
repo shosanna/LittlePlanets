@@ -16,7 +16,7 @@ public class GameState : MonoBehaviour {
 
     // Casovac
     private float _ubehlyCas = 0f;
-    private float _delkaDne = 10f;
+    private float _delkaDne = 100f;
     private float _procentoDne = 0f;
 
     public static GameState Instance
