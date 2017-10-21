@@ -1,11 +1,15 @@
 fileFormatVersion: 2
 guid: 1d61dcf6c7419764e86583efa4343408
-timeCreated: 1508543635
+timeCreated: 1508605114
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Stromy_0
     21300002: Stromy_1
+    21300004: Stromy_2
+    21300006: Stromy_3
+    21300008: Stromy_4
+    21300010: Stromy_5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -76,7 +80,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -86,6 +90,58 @@ TextureImporter:
       tessellationDetail: 0
     - serializedVersion: 2
       name: Stromy_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Stromy_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Stromy_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Stromy_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Stromy_5
       rect:
         serializedVersion: 2
         x: 32

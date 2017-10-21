@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
 
     public PolarCoord PolarCoord;
 
+    private GameObject _cilSekani;
+
     private void Start()
     {
         PolarCoord = new PolarCoord(1, Radius);
@@ -73,5 +75,19 @@ public class PlayerController : MonoBehaviour {
     void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.parent.transform.position, Radius);
+    }
+
+    public void Seknuto()
+    {
+        if (_cilSekani != null)
+        {
+            _cilSekani.GetComponent<Stromoscript>().Seknuto();
+        }
+
+    }
+
+    public void NastavCilSekani(GameObject cil)
+    {
+        _cilSekani = cil;
     }
 }

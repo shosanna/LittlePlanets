@@ -17,10 +17,18 @@ public class Stromoscript : MonoBehaviour {
         _animator = GetComponent<Animator>();
         _sounds = new List<AudioClip> { chop1, chop2, chop3 };
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.X) && _moznoSekat)
+
+    // Kdyz se trigne kolize (s hracem)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject hrac = collision.gameObject;
+        hrac.GetComponent<PlayerController>().NastavCilSekani(this.gameObject);
+        _moznoSekat = true;
+    }
+
+    public void Seknuto()
+    {
+        if (_moznoSekat)
         {
             _animator.SetTrigger("Chop");
             var rnd = new System.Random();
@@ -29,12 +37,6 @@ public class Stromoscript : MonoBehaviour {
 
             AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position, 1f);
         }
-    }
-
-    // Kdyz se trigne kolize (s hracem)
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        _moznoSekat = true;
     }
 
     // Kdyz se trigne kolize (s hracem)
