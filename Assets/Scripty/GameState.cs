@@ -32,9 +32,8 @@ public class GameState : MonoBehaviour {
             Fungus.Flowchart.BroadcastFungusMessage("SpustIntroNapovedu");
         }
 
-        // Hudba
-        PustHudbu();
         _audioSource = GetComponent<AudioSource>();
+        PustHudbu();
     }
 
     void Awake()
