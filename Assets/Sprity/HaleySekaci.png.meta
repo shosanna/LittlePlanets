@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: 1cb7e605c99110e4e8c99a5b1eb0a833
-timeCreated: 1508544098
+timeCreated: 1508546979
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: HaleySekaci_0
     21300002: HaleySekaci_1
+    21300004: HaleySekaci_2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -76,11 +77,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 64
         width: 32
         height: 32
       alignment: 9
-      pivot: {x: 0.5020184, y: 0.22550213}
+      pivot: {x: 0.50302756, y: 0.2396307}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -89,11 +90,24 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.49697244, y: 0.21843779}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HaleySekaci_2
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 32
         height: 32
       alignment: 9
-      pivot: {x: 0.49798164, y: 0.22348377}
+      pivot: {x: 0.5, y: 0.23357567}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

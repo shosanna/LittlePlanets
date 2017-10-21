@@ -30,12 +30,18 @@ public class Runoscript : MonoBehaviour {
 
     public void RunaZmacknuta()
     {
-        _spriteRenderer.sprite = AktivniRuna;
-        AudioSource.PlayClipAtPoint(RunoZvuk, Camera.main.transform.position, 0.05f);
+        if (_spriteRenderer != null)
+        {
+            _spriteRenderer.sprite = AktivniRuna;
+            AudioSource.PlayClipAtPoint(RunoZvuk, Camera.main.transform.position, 0.05f);
+        }
     }
 
     public void SmazRunu()
     {
-        _spriteRenderer.sprite = DefaultRuna;
+        if (_spriteRenderer != null)
+        {
+            _spriteRenderer.sprite = DefaultRuna;
+        }
     }
 }

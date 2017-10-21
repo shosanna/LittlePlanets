@@ -11,8 +11,9 @@ public class GameState : MonoBehaviour {
     // Tutorial
     public bool RunTutorial = true;
 
-    // Zvuk brany
+    // Zvuky
     public bool BranaUspesneVytocena = false;
+    private AudioSource _audioSource;
 
     // Casovac
     private float _ubehlyCas = 0f;
@@ -33,6 +34,7 @@ public class GameState : MonoBehaviour {
 
         // Hudba
         PustHudbu();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Awake()
@@ -69,16 +71,25 @@ public class GameState : MonoBehaviour {
 
     public void PustHudbu()
     {
-        GetComponent<AudioSource>().Play();
+        if (_audioSource != null)
+        {
+            _audioSource.Play();
+        }
     }
 
     public void ZastavHudbu()
     {
-        GetComponent<AudioSource>().Stop();
+        if (_audioSource != null)
+        {
+            _audioSource.Stop();
+        }
     }
 
     public void ZtlumHudbu(float okolik)
     {
-        GetComponent<AudioSource>().volume = okolik;
+        if (_audioSource != null)
+        {
+            _audioSource.volume = okolik;
+        }
     }
 }
