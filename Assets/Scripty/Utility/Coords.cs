@@ -4,6 +4,15 @@ using UnityEngine;
 
 namespace Coords
 {
+    public static class CoordsUtility
+    {
+        public static PolarCoord PolarFromPosition(Vector3 position)
+        {
+            CartesianCoord cartesian = new CartesianCoord(position.x, position.y);
+            return cartesian.ToPolar();
+        }
+    }
+
     public struct PolarCoord
     {
         public float R;

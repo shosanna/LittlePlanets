@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Coords;
 
 [RequireComponent(typeof(Animator))]
 public class Stromoscript : MonoBehaviour {
@@ -24,13 +25,26 @@ public class Stromoscript : MonoBehaviour {
         GameObject hrac = collision.gameObject;
         hrac.GetComponent<PlayerController>().NastavCilSekani(this.gameObject);
         _moznoSekat = true;
+
+        // TODO: NEFUNGUJE
+        var polarniHracCoords = CoordsUtility.PolarFromPosition(hrac.transform.position);
+        var polarniStromu = CoordsUtility.PolarFromPosition(transform.position);
+
+        if (polarniHracCoords.Phi > polarniStromu.Phi)
+        {
+            hrac.GetComponent<SpriteRenderer>().flipX = false;
+        } else
+        {
+            hrac.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
     }
 
     public void Seknuto()
     {
         if (_moznoSekat)
         {
-            // Zruseni napovedu pro sekani
+            // Zruseni napovedy pro sekani
             var napovedy = GameObject.FindGameObjectsWithTag("NapovedaStrom");
             foreach (var napoveda in napovedy)
             {
