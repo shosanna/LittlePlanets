@@ -14,6 +14,7 @@ public class GameState : MonoBehaviour {
     // Zvuky
     public bool BranaUspesneVytocena = false;
     private AudioSource _audioSource;
+    private AudioSource _audioSource2;
 
     // Casovac
     private float _ubehlyCas = 0f;
@@ -32,7 +33,8 @@ public class GameState : MonoBehaviour {
             Fungus.Flowchart.BroadcastFungusMessage("SpustIntroNapovedu");
         }
 
-        _audioSource = GetComponent<AudioSource>();
+        _audioSource = GetComponents<AudioSource>()[0];
+        _audioSource2 = GetComponents<AudioSource>()[1];
         PustHudbu();
     }
 
@@ -73,6 +75,7 @@ public class GameState : MonoBehaviour {
         if (_audioSource != null)
         {
             _audioSource.Play();
+            _audioSource2.Play();
         }
     }
 

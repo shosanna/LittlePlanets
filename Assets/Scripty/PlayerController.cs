@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour {
             _anim.SetTrigger("Jump");
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && _cilSekani != null)
         {
             _anim.SetTrigger("Chop");
         } 
@@ -89,5 +89,10 @@ public class PlayerController : MonoBehaviour {
     public void NastavCilSekani(GameObject cil)
     {
         _cilSekani = cil;
+    }
+
+    public void ZrusCilSekani()
+    {
+        _cilSekani = null;
     }
 }

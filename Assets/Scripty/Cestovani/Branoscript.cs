@@ -73,16 +73,12 @@ public class Branoscript : MonoBehaviour {
             // Pokud se kliknulo na tento gameObject = na branu
             if (hitCollider != null && hitCollider.gameObject == gameObject)
             {
-                // Toglovani otevirani a zavirani knihy - pouze sprite
-                if (Kniha.activeInHierarchy)
-                {
-                    ZavriKnihu();
-                }
-                else
-                {
-                    Kniha.SetActive(true);
-                }
+                ToggleKniha();
             }
+        // Otevirani knihy i pomoci klavesnice
+        } else if (Input.GetKeyDown(KeyCode.X) && _aktivniBrana)
+        {
+            ToggleKniha();
         }
 
         RunaZmacknuta(KeyCode.R, "1");
@@ -90,6 +86,22 @@ public class Branoscript : MonoBehaviour {
         RunaZmacknuta(KeyCode.T, "3");
         RunaZmacknuta(KeyCode.G, "4");
     }
+
+    private void ToggleKniha()
+    {
+        // Toglovani otevirani a zavirani knihy - pouze sprite
+        if (Kniha.activeInHierarchy)
+        {
+            ZavriKnihu();
+        }
+        else
+        {
+            var napoveda = GameObject.FindGameObjectWithTag("NapovedaBrana");
+            Destroy(napoveda);
+            Kniha.SetActive(true);
+        }
+    }
+
 
     private void RunaZmacknuta(KeyCode klavesa, string runokod)
     {

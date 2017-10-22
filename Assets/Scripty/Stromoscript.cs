@@ -30,6 +30,13 @@ public class Stromoscript : MonoBehaviour {
     {
         if (_moznoSekat)
         {
+            // Zruseni napovedu pro sekani
+            var napovedy = GameObject.FindGameObjectsWithTag("NapovedaStrom");
+            foreach (var napoveda in napovedy)
+            {
+                Destroy(napoveda);
+            }
+
             _animator.SetTrigger("Chop");
             var rnd = new System.Random();
             int index = rnd.Next(_sounds.Count - 1);
@@ -43,5 +50,7 @@ public class Stromoscript : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D collision)
     {
         _moznoSekat = false;
+        GameObject hrac = collision.gameObject;
+        hrac.GetComponent<PlayerController>().ZrusCilSekani();
     }
 }
