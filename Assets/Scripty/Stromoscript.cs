@@ -12,6 +12,9 @@ public class Stromoscript : MonoBehaviour {
     public AudioClip chop2;
     public AudioClip chop3;
     private List<AudioClip> _sounds;
+    private GameObject _hrac;
+    public PolarCoord PolarStromu;
+    public PolarCoord PolarHrace;
 
 	// Use this for initialization
 	void Start () {
@@ -19,25 +22,41 @@ public class Stromoscript : MonoBehaviour {
         _sounds = new List<AudioClip> { chop1, chop2, chop3 };
 	}
 
+    private void Update()
+    {
+
+        if (_hrac != null && _moznoSekat)
+        {
+            var u = transform.localPosition;
+            var v = _hrac.transform.localPosition;
+
+            float det = u.x * v.y - v.x * u.y;
+
+            _hrac.GetComponent<SpriteRenderer>().flipX = det > 0;
+
+            //var polarniHracCoords = CoordsUtility.PolarFromPosition(_hrac.transform.localPosition);
+            //var polarniStromu = CoordsUtility.PolarFromPosition(transform.localPosition);
+
+            //PolarStromu = CoordsUtility.PolarFromPosition(transform.localPosition);
+            //PolarHrace = CoordsUtility.PolarFromPosition(_hrac.transform.localPosition);
+
+            //if (polarniHracCoords.Phi < polarniStromu.Phi)
+            //{
+            //    _hrac.GetComponent<SpriteRenderer>().flipX = false;
+            //}
+            //else
+            //{
+            //    _hrac.GetComponent<SpriteRenderer>().flipX = true;
+            //}
+        }
+    }
+
     // Kdyz se trigne kolize (s hracem)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject hrac = collision.gameObject;
-        hrac.GetComponent<PlayerController>().NastavCilSekani(this.gameObject);
+        _hrac = collision.gameObject;
+        _hrac.GetComponent<PlayerController>().NastavCilSekani(this.gameObject);
         _moznoSekat = true;
-
-        // TODO: NEFUNGUJE
-        var polarniHracCoords = CoordsUtility.PolarFromPosition(hrac.transform.position);
-        var polarniStromu = CoordsUtility.PolarFromPosition(transform.position);
-
-        if (polarniHracCoords.Phi > polarniStromu.Phi)
-        {
-            hrac.GetComponent<SpriteRenderer>().flipX = false;
-        } else
-        {
-            hrac.GetComponent<SpriteRenderer>().flipX = true;
-        }
-
     }
 
     public void Seknuto()
@@ -63,8 +82,8 @@ public class Stromoscript : MonoBehaviour {
     // Kdyz se trigne kolize (s hracem)
     private void OnTriggerExit2D(Collider2D collision)
     {
+        _hrac.GetComponent<PlayerController>().ZrusCilSekani();
+        _hrac = null;
         _moznoSekat = false;
-        GameObject hrac = collision.gameObject;
-        hrac.GetComponent<PlayerController>().ZrusCilSekani();
     }
 }

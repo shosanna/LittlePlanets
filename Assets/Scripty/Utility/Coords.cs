@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace Coords
         }
     }
 
+    [Serializable]
     public struct PolarCoord
     {
         public float R;
@@ -54,6 +56,11 @@ namespace Coords
 
             float r = Mathf.Sqrt(X * X + Y * Y);
             float phi = Mathf.Acos(X / r);
+
+            if (Y < 0)
+            {
+                phi = 2 * Mathf.PI - phi;
+            }
 
             return new PolarCoord(r, phi);
         }
