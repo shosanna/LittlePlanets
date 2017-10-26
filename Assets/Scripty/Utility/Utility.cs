@@ -9,5 +9,6 @@ namespace Assets.Scripty.Utility
 {
     public static class Utility
     {
+
     }
 }

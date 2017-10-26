@@ -690,6 +690,7 @@
     <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Scripts\SfxrParams.cs" />
     <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Scripts\SfxrSynth.cs" />
     <Compile Include="Assets\FungusExamples\FungusLua\Bindings\CustomScript.cs" />
+    <Compile Include="Assets\Napovedascript.cs" />
     <Compile Include="Assets\Scripty\Cestovani\Branoscript.cs" />
     <Compile Include="Assets\Scripty\Cestovani\Branosystem.cs" />
     <Compile Include="Assets\Scripty\Cestovani\Runoscript.cs" />

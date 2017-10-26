@@ -96,8 +96,11 @@ public class Branoscript : MonoBehaviour {
         }
         else
         {
-            var napoveda = GameObject.FindGameObjectWithTag("NapovedaBrana");
-            Destroy(napoveda);
+            var napoveda = GetComponentInChildren<Napovedascript>();
+            if (napoveda != null)
+            {
+                Destroy(napoveda.gameObject);
+            }
             Kniha.SetActive(true);
         }
     }

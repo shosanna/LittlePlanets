@@ -64,11 +64,12 @@ public class Stromoscript : MonoBehaviour {
         if (_moznoSekat)
         {
             // Zruseni napovedy pro sekani
-            var napovedy = GameObject.FindGameObjectsWithTag("NapovedaStrom");
-            foreach (var napoveda in napovedy)
+            var napoveda = GetComponentInChildren<Napovedascript>();
+            if (napoveda != null)
             {
-                Destroy(napoveda);
+                Destroy(napoveda.gameObject);
             }
+    
 
             _animator.SetTrigger("Chop");
             var rnd = new System.Random();

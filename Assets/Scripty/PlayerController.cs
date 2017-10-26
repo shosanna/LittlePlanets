@@ -7,27 +7,30 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     //private SpriteRenderer _renderer;
     private Animator _anim;
-
     public Transform cameraTransform;
     public float Radius;
-
     public float yVelocity = 0;
-
     public PolarCoord PolarCoord;
-
     private GameObject _cilSekani;
+    private bool _isGrounded = true;
 
     private void Start()
     {
         PolarCoord = new PolarCoord(1, Radius);
         //_renderer = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
+        origCamera = Camera.main.transform;
     }
 
     void Update () {
-        cameraTransform.position = new Vector3(transform.position.x, transform.position.y, cameraTransform.position.z);
-        var movement = Input.GetAxisRaw("Horizontal");
+        // pro dvoj hopik
+        _isGrounded = PolarCoord.R > Radius;
 
+        // sledovani hrace
+        cameraTransform.position = new Vector3(transform.position.x, transform.position.y, cameraTransform.position.z);
+
+        // pohyb
+        var movement = Input.GetAxisRaw("Horizontal");
         if (movement == 1)
         {
             //_renderer.flipX = false;
@@ -43,10 +46,10 @@ public class PlayerController : MonoBehaviour {
             _anim.SetBool("isMoving", false);
         }
 
-            yVelocity -= 3 * Time.deltaTime;
+        yVelocity -= 3 * Time.deltaTime;
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded)
         {
             yVelocity = 1;
             _anim.SetTrigger("Jump");
@@ -73,14 +76,18 @@ public class PlayerController : MonoBehaviour {
         // x = pi * dt
 
         PolarCoord.Phi += -movement * (Mathf.PI / 5) * Time.deltaTime;
+        // oprava polarnich souradnic pro chuzi po jizni polokouli
         if (PolarCoord.Phi < 0) {
             PolarCoord.Phi = PolarCoord.Phi + (2 * Mathf.PI);
         }
         PolarCoord.Phi = PolarCoord.Phi % (2 * Mathf.PI);
 
         transform.localPosition = PolarCoord.ToCartesian().ToVector3();
+
+        // nataceni spritu
         transform.rotation = Quaternion.EulerRotation(0, 0, PolarCoord.Phi - Mathf.PI / 2);
 
+        // shake obrazovky pri sekani stromu
         if (shake)
         {
             float shakeOffset = Random.RandomRange(0, 0.015f);
