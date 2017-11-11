@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.2.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -690,18 +692,22 @@
     <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Scripts\SfxrParams.cs" />
     <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Scripts\SfxrSynth.cs" />
     <Compile Include="Assets\FungusExamples\FungusLua\Bindings\CustomScript.cs" />
-    <Compile Include="Assets\Napovedascript.cs" />
     <Compile Include="Assets\Scripty\Cestovani\Branoscript.cs" />
     <Compile Include="Assets\Scripty\Cestovani\Branosystem.cs" />
     <Compile Include="Assets\Scripty\Cestovani\Runoscript.cs" />
-    <Compile Include="Assets\Scripty\Den.cs" />
     <Compile Include="Assets\Scripty\Efekty\Destovac.cs" />
     <Compile Include="Assets\Scripty\Efekty\Zatemnovac.cs" />
     <Compile Include="Assets\Scripty\GameState.cs" />
-    <Compile Include="Assets\Scripty\Planetascript.cs" />
-    <Compile Include="Assets\Scripty\PlayerController.cs" />
-    <Compile Include="Assets\Scripty\Stromoscript.cs" />
+    <Compile Include="Assets\Scripty\Inventar.cs" />
+    <Compile Include="Assets\Scripty\Materialy.cs" />
+    <Compile Include="Assets\Scripty\Objekty\Keroscript.cs" />
+    <Compile Include="Assets\Scripty\Objekty\Napovedascript.cs" />
+    <Compile Include="Assets\Scripty\Objekty\Planetascript.cs" />
+    <Compile Include="Assets\Scripty\Objekty\PlayerController.cs" />
+    <Compile Include="Assets\Scripty\Objekty\Stromoscript.cs" />
+    <Compile Include="Assets\Scripty\Slot.cs" />
     <Compile Include="Assets\Scripty\Utility\Coords.cs" />
+    <Compile Include="Assets\Scripty\Utility\Den.cs" />
     <Compile Include="Assets\Scripty\Utility\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
