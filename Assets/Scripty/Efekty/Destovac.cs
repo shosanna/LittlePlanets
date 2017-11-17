@@ -16,7 +16,7 @@ public class Destovac : MonoBehaviour {
         Debug.Log("Zacina mozna prset?");
         System.Random rnd = new System.Random();
 
-        if (rnd.Next(100) > 60)
+        if (rnd.Next(100) > 80)
         {
             Prsi = true;
         }
