@@ -42,7 +42,7 @@ public class Stromoscript : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _hrac = collision.gameObject;
-        _hrac.GetComponent<PlayerController>().NastavCil(this.gameObject, "sekani");
+        _hrac.GetComponent<PlayerController>().NastavCil(this.gameObject);
         _moznoSekat = true;
     }
 

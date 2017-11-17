@@ -6,6 +6,8 @@ public class Planetascript : MonoBehaviour {
 
     // UI Casovac
     public Transform UICasovacePrefab;
+    public Transform PodvodoPrefab;
+    public bool PovolitPodvod = true;
     private GameObject _rucickaCasovace;
     private float _horniMezRucicky = 371f;
     private float _dolniMezRucicky = 244f;
@@ -14,6 +16,14 @@ public class Planetascript : MonoBehaviour {
     private Destovac _destovac;
 
     void Start () {
+        // Zobraz napovedotlacitka
+        if (PovolitPodvod)
+        {
+            // Nastaveni UI pro vsechny planety
+            Instantiate(PodvodoPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject.Find("Podvodnik(Clone)").GetComponent<Canvas>().worldCamera = Camera.main;
+        }
+
         // Nastaveni UI pro vsechny planety
         Instantiate(UICasovacePrefab, new Vector3(0, 0, 0), Quaternion.identity);
         GameObject.Find("UI(Clone)").GetComponent<Canvas>().worldCamera = Camera.main;

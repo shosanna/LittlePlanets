@@ -36,6 +36,7 @@ public class GameState : MonoBehaviour {
             Fungus.Flowchart.BroadcastFungusMessage("SpustIntroNapovedu");
         }
 
+
         _audioSource = GetComponents<AudioSource>()[0];
         _audioSource2 = GetComponents<AudioSource>()[1];
 
@@ -51,8 +52,10 @@ public class GameState : MonoBehaviour {
         // Hned znic jine instance GameState - tento musi byt unikantni (Singleton)
         if (_instance != null && _instance != this) {
             Destroy(this.gameObject);
+       
             // Znic take vsechny napovedy - maji byt jen jednou
             var napovedy = GameObject.FindGameObjectsWithTag("Napoveda");
+
             foreach (var napoveda in napovedy) {
                 Destroy(napoveda);
             }

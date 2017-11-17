@@ -43,14 +43,16 @@ public class Keroscript : MonoBehaviour {
             AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position, 1f);
             _otrhano = true;
             _hrac.GetComponent<PlayerController>().ZrusCil();
+        } else {
+            Debug.Log(string.Format("Neni mozno - moznotrhat #{0}, otrhano #{1}", _moznoTrhat, _otrhano));
         }
     }
 
     // Kdyz se trigne kolize (s hracem)
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (!_otrhano) {
+        if (!_otrhano && _hrac == null) {
             _hrac = collision.gameObject;
-            _hrac.GetComponent<PlayerController>().NastavCil(this.gameObject, "trhani");
+            _hrac.GetComponent<PlayerController>().NastavCil(this.gameObject);
             _moznoTrhat = true;
         }
     }

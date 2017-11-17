@@ -7,24 +7,23 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     //private SpriteRenderer _renderer;
     private Animator _anim;
+
     public Transform cameraTransform;
     public float Radius;
     public float yVelocity = 0;
     public PolarCoord PolarCoord;
-    private GameObject _cilSekani;
-    private GameObject _cilTrhani;
+    private GameObject _cilAkce;
 
     private bool _isGrounded = true;
 
-    private void Start()
-    {
+    private void Start() {
         PolarCoord = new PolarCoord(1, Radius);
         //_renderer = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
         origCamera = Camera.main.transform;
     }
 
-    void Update () {
+    void Update() {
         // pro dvoj hopik
         _isGrounded = PolarCoord.R > Radius;
 
@@ -33,44 +32,34 @@ public class PlayerController : MonoBehaviour {
 
         // pohyb
         var movement = Input.GetAxisRaw("Horizontal");
-        if (movement == 1)
-        {
+        if (movement == 1) {
             //_renderer.flipX = false;
             _anim.SetBool("isMoving", true);
-        }
-        else if (movement == -1)
-        {
+        } else if (movement == -1) {
             //_renderer.flipX = true;
             _anim.SetBool("isMoving", true);
-        }
-        else
-        {
+        } else {
             _anim.SetBool("isMoving", false);
         }
 
         yVelocity -= 3 * Time.deltaTime;
 
 
-        if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded)
-        {
+        if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded) {
             yVelocity = 1;
             _anim.SetTrigger("Jump");
         }
 
-        if (Input.GetKeyDown(KeyCode.X) && _cilSekani != null)
-        {
+        if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null) {
             _anim.SetTrigger("Chop");
         }
 
-        if (Input.GetKeyDown(KeyCode.X) && _cilTrhani != null)
-        {
-            Debug.Log("Panacek trha");
+        if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Keroscript>() != null) {
             _anim.SetTrigger("Trhej");
         }
 
         PolarCoord.R += yVelocity * Time.deltaTime;
-        if (PolarCoord.R < Radius)
-        {
+        if (PolarCoord.R < Radius) {
             yVelocity = 0;
             PolarCoord.R = Radius;
         }
@@ -88,47 +77,35 @@ public class PlayerController : MonoBehaviour {
         transform.rotation = Quaternion.EulerRotation(0, 0, PolarCoord.Phi - Mathf.PI / 2);
 
         // shake obrazovky pri sekani stromu
-        if (shake)
-        {
+        if (shake) {
             float shakeOffset = Random.RandomRange(0, 0.015f);
             Camera.main.transform.position = origCamera.position + new Vector3(shakeOffset, shakeOffset, shakeOffset);
-        } else
-        {
+        } else {
             Camera.main.transform.position = origCamera.position;
         }
-        
     }
 
 
-    void OnDrawGizmos()
-    {
+    void OnDrawGizmos() {
         Gizmos.DrawWireSphere(transform.parent.transform.position, Radius);
     }
 
-    public void Seknuto()
-    {
-        if (_cilSekani != null)
-        {
+    public void Seknuto() {
+        if (_cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null) {
             origCamera = Camera.main.transform;
             StartCoroutine(Neshake());
             shake = true;
-            _cilSekani.GetComponent<Stromoscript>().Seknuto();
+            _cilAkce.GetComponent<Stromoscript>().Seknuto();
         }
-
     }
 
-    public void Trhani()
-    {
-        Debug.Log("Volam z animace");
-        if (_cilTrhani != null)
-        {
-            _cilTrhani.GetComponent<Keroscript>().Trhani();
+    public void Trhani() {
+        if (_cilAkce != null && _cilAkce.GetComponent<Keroscript>() != null) {
+            _cilAkce.GetComponent<Keroscript>().Trhani();
         }
-
     }
 
-    IEnumerator Neshake()
-    {
+    IEnumerator Neshake() {
         yield return new WaitForSeconds(0.07f);
         shake = false;
     }
@@ -136,22 +113,11 @@ public class PlayerController : MonoBehaviour {
     Transform origCamera;
     bool shake = false;
 
-    public void NastavCil(GameObject cil, string id)
-    {
-        if (id == "sekani")
-        {
-            _cilSekani = cil;
-        }
-        else if (id == "trhani")
-        {
-            Debug.Log("Nastavuju trhani");
-            _cilTrhani = cil;
-        }
+    public void NastavCil(GameObject cil) {
+        _cilAkce = cil;
     }
 
-    public void ZrusCil()
-    {
-        _cilSekani = null;
-        _cilTrhani = null;
+    public void ZrusCil() {
+        _cilAkce = null;
     }
 }
