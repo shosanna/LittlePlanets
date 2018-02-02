@@ -64,7 +64,8 @@ public class PlayerController : MonoBehaviour {
             PolarCoord.R = Radius;
         }
 
-        PolarCoord.Phi += -movement * (Mathf.PI / 5) * Time.deltaTime;
+        // 0.68 je radius originalni planety, toto upravi rychlost pro jinak velke planety
+        PolarCoord.Phi += -movement * (Mathf.PI / 5) * Time.deltaTime * 0.68f / Radius;
         // oprava polarnich souradnic pro chuzi po jizni polokouli
         if (PolarCoord.Phi < 0) {
             PolarCoord.Phi = PolarCoord.Phi + (2 * Mathf.PI);

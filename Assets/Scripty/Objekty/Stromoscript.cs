@@ -17,6 +17,7 @@ public class Stromoscript : MonoBehaviour {
     public PolarCoord PolarStromu;
     public PolarCoord PolarHrace;
     public Sprite DrevoObrazek;
+    private int _kapacita = 3;
 
 	// Use this for initialization
 	void Start () {
@@ -58,13 +59,17 @@ public class Stromoscript : MonoBehaviour {
             }
 
             GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Drevo, 1, DrevoObrazek);
-
+            _kapacita--;
             _animator.SetTrigger("Chop");
             var rnd = new System.Random();
             int index = rnd.Next(_sounds.Count - 1);
             var sound = _sounds[index];
 
             AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position, 1f);
+        }
+
+        if (_kapacita <= 0) {
+            Destroy(gameObject);
         }
     }
 
