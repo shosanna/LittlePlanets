@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour {
-    //private SpriteRenderer _renderer;
     private Animator _anim;
 
     public Transform cameraTransform;
@@ -18,8 +18,15 @@ public class PlayerController : MonoBehaviour {
     private bool _isGrounded = true;
 
     private void Start() {
-        var cartesianBrano = new CartesianCoord(branoTransform.transform.localPosition.x, branoTransform.transform.localPosition.y);
-        PolarCoord = new PolarCoord(cartesianBrano.ToPolar().R, cartesianBrano.ToPolar().Phi);
+
+        if (branoTransform && !GameState.Instance.RunTutorial) {
+            var cartesianBrano = new CartesianCoord(branoTransform.transform.localPosition.x,
+                branoTransform.transform.localPosition.y);
+            PolarCoord = new PolarCoord(cartesianBrano.ToPolar().R, cartesianBrano.ToPolar().Phi);
+        } else {
+            PolarCoord = new PolarCoord(1, Radius);
+        }
+
         _anim = GetComponent<Animator>();
         origCamera = Camera.main.transform;
     }
