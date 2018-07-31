@@ -32,6 +32,13 @@ public class Keroscript : MonoBehaviour {
     }
 
     public void Trhani() {
+        // Zruseni napovedy pro sekani
+        var napoveda = GetComponentInChildren<Napovedascript>();
+        if (napoveda != null)
+        {
+            Destroy(napoveda.gameObject);
+        }
+
         if (_moznoTrhat && !_otrhano) {
             GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Boruvka, 5, BoruvkaObrazek);
 

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     private Animator _anim;
 
     public Transform cameraTransform;
+    public Transform branoTransform;
     public float Radius;
     public float yVelocity = 0;
     public PolarCoord PolarCoord;
@@ -17,8 +18,8 @@ public class PlayerController : MonoBehaviour {
     private bool _isGrounded = true;
 
     private void Start() {
-        PolarCoord = new PolarCoord(1, Radius);
-        //_renderer = GetComponent<SpriteRenderer>();
+        var cartesianBrano = new CartesianCoord(branoTransform.transform.localPosition.x, branoTransform.transform.localPosition.y);
+        PolarCoord = new PolarCoord(cartesianBrano.ToPolar().R, cartesianBrano.ToPolar().Phi);
         _anim = GetComponent<Animator>();
         origCamera = Camera.main.transform;
     }
