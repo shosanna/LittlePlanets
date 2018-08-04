@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     public Transform branoTransform;
     public float Radius;
     public float yVelocity = 0;
+    public float speed = 5;
     public PolarCoord PolarCoord;
     private GameObject _cilAkce;
 
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour {
             _anim.SetBool("isMoving", false);
         }
 
-        yVelocity -= 3 * Time.deltaTime;
+        yVelocity -= 5 * Time.deltaTime;
 
 
         if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded) {
@@ -66,6 +67,12 @@ public class PlayerController : MonoBehaviour {
             _anim.SetTrigger("Trhej");
         }
 
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            speed = 3;
+        } else {
+            speed = 5;
+        }
+
         PolarCoord.R += yVelocity * Time.deltaTime;
         if (PolarCoord.R < Radius) {
             yVelocity = 0;
@@ -73,7 +80,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         // 0.68 je radius originalni planety, toto upravi rychlost pro jinak velke planety
-        PolarCoord.Phi += -movement * (Mathf.PI / 5) * Time.deltaTime * 0.68f / Radius;
+        PolarCoord.Phi += -movement * (Mathf.PI / speed) * Time.deltaTime * 0.68f / Radius;
         // oprava polarnich souradnic pro chuzi po jizni polokouli
         if (PolarCoord.Phi < 0) {
             PolarCoord.Phi = PolarCoord.Phi + (2 * Mathf.PI);
