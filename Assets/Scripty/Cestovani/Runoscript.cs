@@ -33,7 +33,7 @@ public class Runoscript : MonoBehaviour {
         if (_spriteRenderer != null)
         {
             _spriteRenderer.sprite = AktivniRuna;
-            AudioSource.PlayClipAtPoint(RunoZvuk, Camera.main.transform.position, 0.05f);
+            AudioSource.PlayClipAtPoint(RunoZvuk, Camera.main.transform.position, 1f);
         }
     }
 

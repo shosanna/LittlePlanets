@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
     private bool _isGrounded = true;
 
     private void Start() {
-
+        // postava zacina na brane krom poprve (pro tutorial)
         if (branoTransform && !GameState.Instance.RunTutorial) {
             var cartesianBrano = new CartesianCoord(branoTransform.transform.localPosition.x,
                 branoTransform.transform.localPosition.y);
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour {
             _anim.SetTrigger("Trhej");
         }
 
+        // beh
         if (Input.GetKey(KeyCode.LeftShift)) {
             speed = 3;
         } else {
