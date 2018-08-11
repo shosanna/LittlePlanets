@@ -17,6 +17,11 @@ namespace Assets.Scripty {
             _id = id;
         }
 
+        public int ZiskejPocet()
+        {
+            return _pocet;
+        }
+
         internal void Pridej(Materialy material, int kolik, Sprite obrazek) {
             _material = material;
             _pocet = kolik;

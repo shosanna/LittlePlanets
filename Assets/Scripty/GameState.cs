@@ -1,14 +1,17 @@
 ﻿using Assets.Scripty;
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class GameState : MonoBehaviour {
     // Core
     private static GameState _instance = null;
-
     public Inventar Inventar;
 
     // Tutorial
@@ -22,7 +25,6 @@ public class GameState : MonoBehaviour {
 
     // Casovac
     private float _ubehlyCas = 0f;
-
     private float _delkaDne = 100f;
     private float _procentoDne = 0f;
 
@@ -30,12 +32,14 @@ public class GameState : MonoBehaviour {
         get { return _instance; }
     }
 
+    public Sprite DefaultniDrevoObrazek;
+    public Sprite DefaultniBoruvkoObrazek;
+
     void Start() {
         // Tutorial se spousti jen prvne
         if (RunTutorial == true) {
             Fungus.Flowchart.BroadcastFungusMessage("SpustIntroNapovedu");
         }
-
 
         _audioSource = GetComponents<AudioSource>()[0];
         _audioSource2 = GetComponents<AudioSource>()[1];
@@ -98,4 +102,62 @@ public class GameState : MonoBehaviour {
     public void ZtlumHudbu(float okolik) {
         _audioSource.volume = okolik;
     }
+
+    public void Save() {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+        PlayerData data = new PlayerData();
+        data.Planeta = SceneManager.GetActiveScene().name;
+        data.RunTutorial = GameState.Instance.RunTutorial;
+        data.UbehlyCas = GameState.Instance._ubehlyCas;
+
+        Inventar inv = GameState.Instance.Inventar;
+        data.PocetBoruvek = inv.ZiskejPocet(Materialy.Boruvka);
+        data.PocetDreva = inv.ZiskejPocet(Materialy.Drevo);
+
+        bf.Serialize(file, data);
+        file.Close();
+    }
+
+    public void Load()
+    {
+        Debug.Log("Zacatek loadu");
+        if (File.Exists(Application.persistentDataPath + "/playerInfo.dat")) {
+            Debug.Log("File existuje, loaduju");
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+            PlayerData data = (PlayerData) bf.Deserialize(file);
+            file.Close();
+
+            GameState.Instance.RunTutorial = data.RunTutorial;
+            GameState.Instance._ubehlyCas = data.UbehlyCas;
+
+            Inventar inv = GameState.Instance.Inventar;
+            inv.Vynuluj();
+            inv.PridejDoVolnehoSlotu(Materialy.Boruvka, data.PocetBoruvek, DefaultniBoruvkoObrazek);
+            inv.PridejDoVolnehoSlotu(Materialy.Drevo, data.PocetDreva, DefaultniDrevoObrazek);
+
+            SceneManager.LoadScene(data.Planeta);
+        }
+    }
+
+    void OnGUI() {
+        if (GUI.Button(new Rect(10, 100, 100, 30), "Save")) {
+            Save();
+        }
+
+        if (GUI.Button(new Rect(10, 140, 100, 30), "Load"))
+        {
+            Load();
+        }
+    }
+}
+
+[Serializable]
+class PlayerData {
+    public float UbehlyCas;
+    public bool RunTutorial;
+    public int PocetDreva;
+    public int PocetBoruvek;
+    public string Planeta;
 }

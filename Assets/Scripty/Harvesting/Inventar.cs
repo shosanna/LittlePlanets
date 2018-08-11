@@ -38,5 +38,24 @@ namespace Assets.Scripty {
         public Slot SlotProMaterial(Materialy material) {
             return _sloty.FirstOrDefault(x => !x.JeVolno() && x.Material() == material);
         }
+
+        public int ZiskejPocet(Materialy material) {
+            var slot = SlotProMaterial(material);
+
+            if (slot != null) {
+                return slot.ZiskejPocet();
+            }
+            else {
+                return 0;
+            }
+        }
+
+        public void Vynuluj() {
+            _sloty = new List<Slot>();
+            for (int i = 1; i <= 3; i++)
+            {
+                _sloty.Add(new Slot(string.Format("Slot{0}", i)));
+            }
+        }
     }
 }
