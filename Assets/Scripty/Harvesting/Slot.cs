@@ -48,12 +48,14 @@ namespace Assets.Scripty {
         }
 
         public void VykresliSe() {
-            GameObject gameObject = GameObject.Find(_id).gameObject;
-            var renderer = gameObject.GetComponent<SpriteRenderer>();
+            if (GameObject.Find(_id) != null) {
+                GameObject gameObject = GameObject.Find(_id).gameObject;
+                var renderer = gameObject.GetComponent<SpriteRenderer>();
 
-            renderer.sprite = _obrazek;
-            var text = gameObject.GetComponentInChildren<Text>();
-            text.text = _pocet.ToString();
+                renderer.sprite = _obrazek;
+                var text = gameObject.GetComponentInChildren<Text>();
+                text.text = _pocet.ToString();
+            }
         }
     }
 }

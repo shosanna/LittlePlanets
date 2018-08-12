@@ -16,6 +16,12 @@ public class Planetascript : MonoBehaviour {
     private Destovac _destovac;
 
     void Start () {
+        // Tutorial se spousti jen prvne
+        if (GameState.Instance.RunTutorial)
+        {
+            GameState.Instance.SpustTutorial();
+        }
+
         // Zobraz napovedotlacitka
         if (PovolitPodvod)
         {

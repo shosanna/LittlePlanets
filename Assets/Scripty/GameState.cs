@@ -15,7 +15,7 @@ public class GameState : MonoBehaviour {
     public Inventar Inventar;
 
     // Tutorial
-    public bool RunTutorial = true;
+    public bool RunTutorial = false;
 
     // Zvuky
     public bool BranaUspesneVytocena = false;
@@ -36,11 +36,6 @@ public class GameState : MonoBehaviour {
     public Sprite DefaultniBoruvkoObrazek;
 
     void Start() {
-        // Tutorial se spousti jen prvne
-        if (RunTutorial == true) {
-            Fungus.Flowchart.BroadcastFungusMessage("SpustIntroNapovedu");
-        }
-
         _audioSource = GetComponents<AudioSource>()[0];
         _audioSource2 = GetComponents<AudioSource>()[1];
 
@@ -103,6 +98,10 @@ public class GameState : MonoBehaviour {
         _audioSource.volume = okolik;
     }
 
+    public void SpustTutorial() {
+        Fungus.Flowchart.BroadcastFungusMessage("SpustIntroNapovedu");
+    }
+
     public void Save() {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
@@ -121,7 +120,6 @@ public class GameState : MonoBehaviour {
 
     public void Load()
     {
-        Debug.Log("Zacatek loadu");
         if (File.Exists(Application.persistentDataPath + "/playerInfo.dat")) {
             Debug.Log("File existuje, loaduju");
             BinaryFormatter bf = new BinaryFormatter();
@@ -142,13 +140,10 @@ public class GameState : MonoBehaviour {
     }
 
     void OnGUI() {
-        if (GUI.Button(new Rect(10, 100, 100, 30), "Save")) {
-            Save();
-        }
-
-        if (GUI.Button(new Rect(10, 140, 100, 30), "Load"))
-        {
-            Load();
+        if (SceneManager.GetActiveScene().name != "intro") {
+            if (GUI.Button(new Rect(Screen.width - 130, Screen.height - 50, 100, 30), "Save")) {
+                Save();
+            }
         }
     }
 }
