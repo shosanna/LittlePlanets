@@ -16,7 +16,6 @@ public class Stromoscript : MonoBehaviour {
     private GameObject _hrac;
     public PolarCoord PolarStromu;
     public PolarCoord PolarHrace;
-    public Sprite DrevoObrazek;
     private int _kapacita = 3;
 
 	// Use this for initialization
@@ -58,7 +57,7 @@ public class Stromoscript : MonoBehaviour {
                 Destroy(napoveda.gameObject);
             }
 
-            GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Drevo, 1, DrevoObrazek);
+            GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Drevo, 1);
             _kapacita--;
             _animator.SetTrigger("Chop");
             var rnd = new System.Random();

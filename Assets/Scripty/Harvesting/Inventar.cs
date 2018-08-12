@@ -7,19 +7,23 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Scripty {
     public class Inventar {
+        private Dictionary<Materialy, Sprite> _obrazky = new Dictionary<Materialy, Sprite>();
+
         private List<Slot> _sloty = new List<Slot>();
 
         public Inventar() {
             for (int i = 1; i <= 3; i++) {
                 _sloty.Add(new Slot(string.Format("Slot{0}", i)));
             }
+            _obrazky[Materialy.Boruvka] = Resources.Load<Sprite>("Sprity/boruvka");
+            _obrazky[Materialy.Drevo] = Resources.Load<Sprite>("Sprity/drevo");
         }
 
         public void MujUpdate() {
             _sloty.ForEach(x => x.VykresliSe());
         }
 
-        public void PridejDoVolnehoSlotu(Materialy material, int kolik, Sprite obrazek) {
+        public void PridejDoVolnehoSlotu(Materialy material, int kolik) {
             var slot = SlotProMaterial(material);
 
             if (slot != null) {
@@ -29,7 +33,7 @@ namespace Assets.Scripty {
 
                 if (volnySlot != null) {
                     volnySlot.Obsazen(volnySlot.Name);
-                    volnySlot.Pridej(material, kolik, obrazek);
+                    volnySlot.Pridej(material, kolik, _obrazky[material]);
                 } else {
                     Debug.Log("Plno");
                 }

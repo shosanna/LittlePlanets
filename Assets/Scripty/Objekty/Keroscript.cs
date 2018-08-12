@@ -11,7 +11,6 @@ public class Keroscript : MonoBehaviour {
     public AudioClip trh3;
     private List<AudioClip> _sounds;
     private GameObject _hrac;
-    public Sprite BoruvkaObrazek;
     public bool _otrhano = false;
 
     // Use this for initialization
@@ -40,7 +39,7 @@ public class Keroscript : MonoBehaviour {
         }
 
         if (_moznoTrhat && !_otrhano) {
-            GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Boruvka, 5, BoruvkaObrazek);
+            GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Boruvka, 5);
 
             _animator.SetTrigger("Trhani");
             var rnd = new System.Random();

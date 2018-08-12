@@ -33,7 +33,7 @@ public class Destovac : MonoBehaviour {
         if (!_audioSource.isPlaying && Prsi)
         {
             _audioSource.Play();
-            GameState.Instance.ZastavHudbu();
+            GameState.Instance.AudioManager.ZastavHudbu();
             Prsi = false;
         }
     }
