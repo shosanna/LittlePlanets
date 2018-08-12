@@ -27,7 +27,6 @@ namespace Assets.Scripty {
 
         public static void Load() {
             if (File.Exists(Application.persistentDataPath + "/playerInfo.dat")) {
-                Debug.Log("File existuje, loaduju");
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
                 PlayerData data = (PlayerData) bf.Deserialize(file);

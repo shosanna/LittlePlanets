@@ -13,7 +13,6 @@ public class Destovac : MonoBehaviour {
 
     public void ZacniMoznaPrset()
     {
-        Debug.Log("Zacina mozna prset?");
         System.Random rnd = new System.Random();
 
         if (rnd.Next(100) > 80)

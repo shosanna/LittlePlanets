@@ -25,7 +25,8 @@ public class GameState : MonoBehaviour {
     // Casovac
     public float _ubehlyCas = 0f;
 
-    private float _delkaDne = 100f;
+    private int _den = 0;
+    private float _delkaDne = 10f;
     private float _procentoDne = 0f;
 
     public static GameState Instance {
@@ -73,10 +74,15 @@ public class GameState : MonoBehaviour {
     public void NastavKonecDne() {
         _ubehlyCas = 0;
         AudioManager.PustHudbu();
+        _den++;
     }
 
     public float ProcentoDne() {
         return _procentoDne;
+    }
+
+    public int Den() {
+        return _den;
     }
 
     public void SpustTutorial() {

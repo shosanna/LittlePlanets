@@ -60,11 +60,17 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null) {
-            _anim.SetTrigger("Chop");
+            _anim.SetTrigger("Chop"); // na konci animace se vola Seknuto()
         }
 
         if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Keroscript>() != null) {
-            _anim.SetTrigger("Trhej");
+            _anim.SetTrigger("Trhej"); // Na konci animace se vola Trhani()
+        }
+
+        if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<CropController>() != null)
+        {
+            // TODO: Animace?? 
+            Zasad();
         }
 
         // beh
@@ -107,6 +113,7 @@ public class PlayerController : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.parent.transform.position, Radius);
     }
 
+    // Je volano na konci animace
     public void Seknuto() {
         if (_cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null) {
             origCamera = Camera.main.transform;
@@ -116,9 +123,18 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    // Je volano na konci animace
     public void Trhani() {
         if (_cilAkce != null && _cilAkce.GetComponent<Keroscript>() != null) {
             _cilAkce.GetComponent<Keroscript>().Trhani();
+        }
+    }
+
+    public void Zasad()
+    {
+        if (_cilAkce != null && _cilAkce.GetComponent<CropController>() != null)
+        {
+            _cilAkce.GetComponent<CropController>().Zasad();
         }
     }
 
