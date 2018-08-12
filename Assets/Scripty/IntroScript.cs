@@ -18,6 +18,8 @@ public class IntroScript : MonoBehaviour {
     void OnGUI() {
 
         if (GUI.Button(new Rect(350, 560, 100, 30), "New Game")) {
+            GameState.Instance.ZmenHudbu();
+            GameState.Instance.PustHudbu();
             GameState.Instance.RunTutorial = true;
             SceneManager.LoadScene("planet1");
         }

@@ -23,6 +23,8 @@ public class GameState : MonoBehaviour {
     private AudioSource _audioSource;
     private AudioSource _audioSource2;
 
+    public List<AudioClip> Hudba = new List<AudioClip>();
+
     // Casovac
     private float _ubehlyCas = 0f;
     private float _delkaDne = 100f;
@@ -43,7 +45,7 @@ public class GameState : MonoBehaviour {
         Debug.Assert(_audioSource2 != null);
 
         Inventar = new Inventar();
-
+        _audioSource2.clip = Hudba[0];
         PustHudbu();
     }
 
@@ -88,6 +90,11 @@ public class GameState : MonoBehaviour {
     public void PustHudbu() {
         _audioSource.Play();
         _audioSource2.Play();
+    }
+
+    public void ZmenHudbu() {
+        var delka = Hudba.Count;
+        _audioSource2.clip = Hudba[UnityEngine.Random.Range(1, delka - 1)];
     }
 
     public void ZastavHudbu() {
