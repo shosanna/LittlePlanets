@@ -15,12 +15,10 @@ public class Zatemnovac : MonoBehaviour
         else if (Den.Vecer())
         {
             Material.SetFloat("_Magnitude", 0.65f);
-            GameState.Instance.AudioManager.ZastavHudbu();
         }
         else if (Den.Odpoledne())
         {
             Material.SetFloat("_Magnitude", 0.85f);
-            GameState.Instance.AudioManager.ZtlumHudbu(0.1f);
         }
         else
         {

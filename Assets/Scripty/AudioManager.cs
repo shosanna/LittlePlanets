@@ -5,15 +5,18 @@ using UnityEngine;
 
 namespace Assets.Scripty {
     public class AudioManager {
-        private AudioSource _audioSource;
-        private AudioSource _audioSource2;
+        private AudioSource _audioSourceEfekt;
+        private AudioSource _audioSourceHudba;
+        private AudioSource _audioSourceZvuky;
+        private AudioClip _defaultEfekt;
+
         private List<AudioClip> _hudba = new List<AudioClip>();
 
         public AudioManager(AudioSource[] audioSource) {
-            _audioSource = audioSource[0];
-            _audioSource2 = audioSource[1];
+            _audioSourceEfekt = audioSource[0];
+            _audioSourceHudba = audioSource[1];
+            _audioSourceZvuky = audioSource[2];
             
-
             //public List<AudioClip> Hudba = new List<AudioClip>();
 
             string[] soundtrack = new[] {
@@ -24,27 +27,50 @@ namespace Assets.Scripty {
             };
 
             _hudba = soundtrack.Select(Resources.Load<AudioClip>).ToList();
+            _defaultEfekt = _audioSourceEfekt.clip;
+            _audioSourceHudba.clip = _hudba[0];
+        }
 
-            _audioSource2.clip = _hudba[0];
+        public void ZmenEfektNaDefault() {
+            _audioSourceEfekt.clip = _defaultEfekt;
+        }
+
+        public void ZmenEfekt(AudioClip clip)
+        {
+            _audioSourceEfekt.clip = clip;
         }
 
 
+        public void ZahrajZvuk(AudioClip clip) {
+            _audioSourceZvuky.PlayOneShot(clip);
+        }
+
         public void PustHudbu() {
-            _audioSource.Play();
-            _audioSource2.Play();
+            _audioSourceHudba.Play();
+        }
+
+        public void PustEfekt()
+        {
+            _audioSourceEfekt.Play();
         }
 
         public void ZmenHudbu() {
             var delka = _hudba.Count;
-            _audioSource2.clip = _hudba[UnityEngine.Random.Range(1, delka - 1)];
+            _audioSourceHudba.clip = _hudba[UnityEngine.Random.Range(1, delka - 1)];
         }
 
         public void ZastavHudbu() {
-            _audioSource.Stop();
+            _audioSourceHudba.Stop();
         }
 
-        public void ZtlumHudbu(float okolik) {
-            _audioSource.volume = okolik;
+        public void ZastavEfekt()
+        {
+            _audioSourceEfekt.Stop();
+        }
+
+        public void ZtlumVse(float okolik) {
+            _audioSourceEfekt.volume = okolik;
+            _audioSourceHudba.volume = okolik;
         }
     }
 }

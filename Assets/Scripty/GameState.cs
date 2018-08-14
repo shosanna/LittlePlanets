@@ -73,7 +73,6 @@ public class GameState : MonoBehaviour {
 
     public void NastavKonecDne() {
         _ubehlyCas = 0;
-        AudioManager.PustHudbu();
         _den++;
     }
 

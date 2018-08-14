@@ -15,7 +15,6 @@ public class Branosystem : MonoBehaviour {
         // uspesne dialovani z predchozi sceny - zvuk
         if (GameState.Instance.BranaUspesneVytocena)
         {
-            AudioSource.PlayClipAtPoint(ZvukUspech, Camera.main.transform.position, 0.8f);
             GameState.Instance.BranaUspesneVytocena = false;
         }
 
@@ -30,12 +29,12 @@ public class Branosystem : MonoBehaviour {
         if(_adresy.ContainsKey(adresa))
         {
             GameState.Instance.BranaUspesneVytocena = true;
-        
             brana.ResetniKnihu();
+            GameState.Instance.AudioManager.ZahrajZvuk(ZvukUspech);
             Application.LoadLevel(_adresy[adresa]);
         } else
         {
-            AudioSource.PlayClipAtPoint(ZvukFail, Camera.main.transform.position, 1.5f);
+            GameState.Instance.AudioManager.ZahrajZvuk(ZvukFail);
             brana.ResetniKnihu();
         }
     }

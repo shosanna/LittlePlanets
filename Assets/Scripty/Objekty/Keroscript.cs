@@ -46,7 +46,7 @@ public class Keroscript : MonoBehaviour {
             int index = rnd.Next(_sounds.Count - 1);
             var sound = _sounds[index];
 
-            AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position, 1f);
+            GameState.Instance.AudioManager.ZahrajZvuk(sound);
             _otrhano = true;
             _hrac.GetComponent<PlayerController>().ZrusCil();
         } else {

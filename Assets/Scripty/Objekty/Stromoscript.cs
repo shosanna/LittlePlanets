@@ -64,7 +64,7 @@ public class Stromoscript : MonoBehaviour {
             int index = rnd.Next(_sounds.Count - 1);
             var sound = _sounds[index];
 
-            AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position, 1f);
+            GameState.Instance.AudioManager.ZahrajZvuk(sound);
         }
 
         if (_kapacita <= 0) {
