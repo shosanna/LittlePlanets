@@ -95,4 +95,8 @@ public class GameState : MonoBehaviour {
             }
         }
     }
+
+    public void NastavDen(int den) {
+        _den = den;
+    }
 }

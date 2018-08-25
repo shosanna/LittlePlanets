@@ -31,7 +31,11 @@ public class Branosystem : MonoBehaviour {
             GameState.Instance.BranaUspesneVytocena = true;
             brana.ResetniKnihu();
             GameState.Instance.AudioManager.ZahrajZvuk(ZvukUspech);
+
+            
             Application.LoadLevel(_adresy[adresa]);
+
+
         } else
         {
             GameState.Instance.AudioManager.ZahrajZvuk(ZvukFail);
