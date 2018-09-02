@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripty;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Branosystem : MonoBehaviour {
     public AudioClip ZvukUspech;
@@ -32,10 +34,8 @@ public class Branosystem : MonoBehaviour {
             brana.ResetniKnihu();
             GameState.Instance.AudioManager.ZahrajZvuk(ZvukUspech);
 
-            
+            SaveManager.SavePlanet(SceneManager.GetActiveScene().name);
             Application.LoadLevel(_adresy[adresa]);
-
-
         } else
         {
             GameState.Instance.AudioManager.ZahrajZvuk(ZvukFail);

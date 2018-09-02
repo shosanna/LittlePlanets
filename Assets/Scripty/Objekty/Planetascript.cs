@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripty;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Planetascript : MonoBehaviour {
 
@@ -16,6 +18,9 @@ public class Planetascript : MonoBehaviour {
     private Destovac _destovac;
 
     void Start () {
+        // Nacist planetu
+        SaveManager.LoadPlanet(SceneManager.GetActiveScene().name);
+
         // Tutorial se spousti jen prvne
         if (GameState.Instance.RunTutorial)
         {

@@ -1,22 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using Assets.Scripty;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CropController : MonoBehaviour {
-    public int index;
-    public int state;
+    public int Index;
+    public int State;
 
     private GameObject _hrac;
     private Sprite _crop1;
     private Sprite _crop2;
     private Sprite _crop3;
 
-    private int _denZasazeni = -999;
-    private Den.Cas _casZasazeni;
+    public int? DenZasazeni = null;
+    public Den.Cas? CasZasazeni = null;
 
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         var slunecnice = Resources.LoadAll<Sprite>("Sprity/slunecnice");
         _crop1 = slunecnice[0];
         _crop2 = slunecnice[1];
@@ -24,15 +27,19 @@ public class CropController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
         ZkontrolujCrop();
 
-        if (state == 0) {
-            GetComponent<SpriteRenderer>().sprite = _crop1;
-        } else if (state == 1) {
-            GetComponent<SpriteRenderer>().sprite = _crop2;
-        } else if (state == 2) {
-            GetComponent<SpriteRenderer>().sprite = _crop3;
+        var renderer = GetComponent<SpriteRenderer>();
+
+        if (State == 0) {
+            renderer.sprite = null;
+        } else if (State == 1) {
+            renderer.sprite = _crop1;
+        } else if (State == 2) {
+            renderer.sprite = _crop2;
+        } else if (State == 3) {
+            renderer.sprite = _crop3;
         }
     }
 
@@ -48,23 +55,29 @@ public class CropController : MonoBehaviour {
 
     public void Zasad() {
         Transform napoveda = transform.Find("NapovedaCrop");
-        if (napoveda)
-        {
+        if (napoveda) {
             Destroy(napoveda.gameObject);
         }
         GetComponent<SpriteRenderer>().sprite = _crop1;
-        _denZasazeni = GameState.Instance.Den();
-        _casZasazeni = Den.Ted();
+        DenZasazeni = GameState.Instance.Den();
+        CasZasazeni = Den.Ted();
+        State = 1;
     }
 
     public void ZkontrolujCrop() {
-        if ((GameState.Instance.Den() - _denZasazeni == 1) && (Den.Ted() == _casZasazeni))
-        {
-            state = 1;
-        }
-        else if ((GameState.Instance.Den() - _denZasazeni == 2) && (Den.Ted() == _casZasazeni))
-        {
-            state = 2;
+        if (DenZasazeni != null && CasZasazeni != null) {
+            if ((GameState.Instance.Den() - DenZasazeni == 1) && (Den.Ted() == CasZasazeni))
+            {
+                State = 2;
+            }
+            else if ((GameState.Instance.Den() - DenZasazeni == 2) && (Den.Ted() == CasZasazeni))
+            {
+                State = 3;
+            }
+            else if ((GameState.Instance.Den() - DenZasazeni >= 2))
+            {
+                State = 3;
+            }
         }
     }
 }

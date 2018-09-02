@@ -8,7 +8,7 @@ public class IntroScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+	    SaveManager.VycistiPlanety();
 	}
 	
 	// Update is called once per frame
