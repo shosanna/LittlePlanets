@@ -17,6 +17,7 @@ namespace Assets.Scripty {
             }
             _obrazky[Materialy.Boruvka] = Resources.Load<Sprite>("Sprity/boruvka");
             _obrazky[Materialy.Drevo] = Resources.Load<Sprite>("Sprity/drevo");
+            _obrazky[Materialy.Slunecnice] = Resources.Load<Sprite>("Sprity/slunecnice_hlava");
         }
 
         public void MujUpdate() {

@@ -26,7 +26,7 @@ public class GameState : MonoBehaviour {
     public float _ubehlyCas = 0f;
 
     private int _den = 0;
-    private float _delkaDne = 10f;
+    private float _delkaDne = 15f;
     private float _procentoDne = 0f;
 
     public static GameState Instance {

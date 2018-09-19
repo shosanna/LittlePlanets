@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<CropController>() != null)
         {
             // TODO: Animace?? 
-            Zasad();
+            ZasadNeboSklid();
         }
 
         // beh
@@ -130,11 +130,11 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void Zasad()
+    public void ZasadNeboSklid()
     {
         if (_cilAkce != null && _cilAkce.GetComponent<CropController>() != null)
         {
-            _cilAkce.GetComponent<CropController>().Zasad();
+            _cilAkce.GetComponent<CropController>().ZasadNeboSklid();
         }
     }
 
