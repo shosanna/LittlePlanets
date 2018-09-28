@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Coords;
 using Assets.Scripty;
+using Pada1.Xml.Serializer.Utils;
 
 [RequireComponent(typeof(Animator))]
 public class Stromoscript : MonoBehaviour {
@@ -16,12 +17,13 @@ public class Stromoscript : MonoBehaviour {
     private GameObject _hrac;
     public PolarCoord PolarStromu;
     public PolarCoord PolarHrace;
-    private int _kapacita = 3;
+    private Poctoscript _poctoscript;
 
 	// Use this for initialization
 	void Start () {
         _animator = GetComponent<Animator>();
         _sounds = new List<AudioClip> { chop1, chop2, chop3 };
+	    _poctoscript = GetComponent<Poctoscript>();
 	}
 
     private void Update()
@@ -58,7 +60,7 @@ public class Stromoscript : MonoBehaviour {
             }
 
             GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Drevo, 1);
-            _kapacita--;
+            _poctoscript.Kapacita--;
             _animator.SetTrigger("Chop");
             var rnd = new System.Random();
             int index = rnd.Next(_sounds.Count - 1);
@@ -67,7 +69,7 @@ public class Stromoscript : MonoBehaviour {
             GameState.Instance.AudioManager.ZahrajZvuk(sound);
         }
 
-        if (_kapacita <= 0) {
+        if (   _poctoscript.Kapacita <= 0) {
             Destroy(gameObject);
         }
     }

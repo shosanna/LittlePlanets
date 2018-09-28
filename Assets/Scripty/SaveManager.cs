@@ -48,12 +48,30 @@ namespace Assets.Scripty {
 
         public static void SavePlanet(string name) {
             var mista = GameObject.FindGameObjectsWithTag("CropMisto");
+            var stromy = GameObject.FindGameObjectsWithTag("Strom");
+
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/" + name + ".dat",
+                FileMode.OpenOrCreate);
+            PlanetData data = new PlanetData();
+
+            if (stromy.Length > 0) {
+                List<Poctoobjekt> ulozeneStromy = new List<Poctoobjekt>();
+
+                foreach (var strom in stromy) {
+                    var poctoscript = strom.GetComponent<Poctoscript>();
+                    Poctoobjekt po = new Poctoobjekt();
+                    po.Index = poctoscript.Index;
+                    po.Kapacita = poctoscript.Kapacita;
+                    ulozeneStromy.Add(po);
+                }
+                data.Stromy = ulozeneStromy;
+            } else {
+                Debug.Log("Zadne stromy pro ulozeni");
+            }
 
             if (mista.Length > 0) {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(Application.persistentDataPath + "/" + name + ".dat",
-                    FileMode.OpenOrCreate);
-                PlanetData data = new PlanetData();
                 List<Misto> ulozenaMista = new List<Misto>();
 
                 foreach (var misto in mista) {
@@ -71,11 +89,12 @@ namespace Assets.Scripty {
                 data.Mista = ulozenaMista;
                 Debug.Log("SAVE:");
                 Debug.Log(data.ToString());
-                bf.Serialize(file, data);
-                file.Close();
             } else {
                 Debug.Log("Zadna mista pro ulozeni");
             }
+
+            bf.Serialize(file, data);
+            file.Close();
         }
 
         public static void LoadPlanet(string name) {
@@ -89,6 +108,20 @@ namespace Assets.Scripty {
                 Debug.Log(data.ToString());
 
                 var mista = GameObject.FindGameObjectsWithTag("CropMisto");
+                var stromy = GameObject.FindGameObjectsWithTag("Strom");
+
+
+                foreach (var strom in stromy) {
+                    var poctoscript = strom.GetComponent<Poctoscript>();
+                    foreach (var ulozenyStrom in data.Stromy)
+                    {
+                        if (ulozenyStrom.Index == poctoscript.Index)
+                        {
+                            poctoscript.Kapacita = ulozenyStrom.Kapacita;
+                            break;
+                        }
+                    }
+                }
 
                 foreach (var misto in mista) {
                     var controller = misto.GetComponent<CropController>();
@@ -137,13 +170,20 @@ namespace Assets.Scripty {
     [Serializable]
     class PlanetData {
         public List<Misto> Mista;
+        public List<Poctoobjekt> Stromy;
 
         public override string ToString() {
-            String result = "Mist celkem: " + Mista.Count + "\n";
-            foreach (var misto in Mista) {
-                result += string.Format("Misto {0}, state: {1}, den: {2}, cas: {3} \n", misto.Index, misto.State,
-                    misto.DenZasazeni, misto.CasZasazeni);
+            var result = "";
+
+            if (Mista != null) {
+                result = "Mist celkem: " + Mista.Count + "\n";
+                foreach (var misto in Mista)
+                {
+                    result += string.Format("Misto {0}, state: {1}, den: {2}, cas: {3} \n", misto.Index, misto.State,
+                        misto.DenZasazeni, misto.CasZasazeni);
+                }
             }
+           
             return result;
         }
     }
@@ -155,4 +195,12 @@ namespace Assets.Scripty {
         public int? DenZasazeni;
         public Den.Cas? CasZasazeni;
     }
+
+    [Serializable]
+    class Poctoobjekt
+    {
+        public int Index;
+        public int Kapacita;
+    }
 }
+
