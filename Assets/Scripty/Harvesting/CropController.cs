@@ -90,7 +90,7 @@ public class CropController : MonoBehaviour {
             {
                 State = 2;
             }
-            else if ((GameState.Instance.Den() - DenZasazeni == 2) && (Den.Ted() == CasZasazeni))
+            else if ((GameState.Instance.Den() - DenZasazeni >= 2) && (Den.Ted() == CasZasazeni))
             {
                 State = 3;
             }

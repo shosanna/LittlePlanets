@@ -23,7 +23,7 @@ public class GameState : MonoBehaviour {
     public bool BranaUspesneVytocena = false;
 
     // Casovac
-    public float _ubehlyCas = 0f;
+    public float UbehlyCas = 0f;
 
     private int _den = 0;
     private float _delkaDne = 15f;
@@ -64,16 +64,17 @@ public class GameState : MonoBehaviour {
 
     private void Update() {
         // Casovac
-        _ubehlyCas += Time.deltaTime;
-        _procentoDne = (float) Math.Round(_ubehlyCas / _delkaDne, 2);
+        UbehlyCas += Time.deltaTime;
+        _procentoDne = (float) Math.Round(UbehlyCas / _delkaDne, 2);
 
         // Inventar
         Inventar.MujUpdate();
     }
 
     public void NastavKonecDne() {
-        _ubehlyCas = 0;
+        UbehlyCas = 0;
         _den++;
+        Debug.Log("Den: " + _den);
     }
 
     public float ProcentoDne() {

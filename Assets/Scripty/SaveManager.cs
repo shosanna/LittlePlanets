@@ -16,7 +16,7 @@ namespace Assets.Scripty {
             PlayerData data = new PlayerData();
             data.Planeta = SceneManager.GetActiveScene().name;
             data.RunTutorial = GameState.Instance.RunTutorial;
-            data.UbehlyCas = GameState.Instance._ubehlyCas;
+            data.UbehlyCas = GameState.Instance.UbehlyCas;
             data.Den = GameState.Instance.Den();
             Inventar inv = GameState.Instance.Inventar;
             data.PocetBoruvek = inv.ZiskejPocet(Materialy.Boruvka);
@@ -34,7 +34,7 @@ namespace Assets.Scripty {
                 file.Close();
 
                 GameState.Instance.RunTutorial = data.RunTutorial;
-                GameState.Instance._ubehlyCas = data.UbehlyCas;
+                GameState.Instance.UbehlyCas = data.UbehlyCas;
                 GameState.Instance.NastavDen(data.Den);
 
                 Inventar inv = GameState.Instance.Inventar;
@@ -87,8 +87,8 @@ namespace Assets.Scripty {
                 }
 
                 data.Mista = ulozenaMista;
-                Debug.Log("SAVE:");
-                Debug.Log(data.ToString());
+                //Debug.Log("SAVE:");
+                //Debug.Log(data.ToString());
             } else {
                 Debug.Log("Zadna mista pro ulozeni");
             }
@@ -104,8 +104,8 @@ namespace Assets.Scripty {
                 PlanetData data = (PlanetData) bf.Deserialize(file);
                 file.Close();
 
-                Debug.Log("LOAD:");
-                Debug.Log(data.ToString());
+                //Debug.Log("LOAD:");
+                //Debug.Log(data.ToString());
 
                 var mista = GameObject.FindGameObjectsWithTag("CropMisto");
                 var stromy = GameObject.FindGameObjectsWithTag("Strom");
