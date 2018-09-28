@@ -48,6 +48,7 @@
 			{
 				fixed4 col = tex2D(_MainTex, i.uv);
 				col *= float4(_Magnitude, _Magnitude, _Magnitude, 0);
+				
 				return col;
 			}
 			ENDCG

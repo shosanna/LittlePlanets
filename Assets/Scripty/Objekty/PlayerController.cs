@@ -60,7 +60,9 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null) {
-            _anim.SetTrigger("Chop"); // na konci animace se vola Seknuto()
+            if (_cilAkce.GetComponent<Poctoscript>().Kapacita > 0) {
+                _anim.SetTrigger("Chop"); // na konci animace se vola Seknuto()
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Keroscript>() != null) {

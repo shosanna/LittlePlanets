@@ -5,8 +5,10 @@ using UnityEngine;
 using Coords;
 using Assets.Scripty;
 using Pada1.Xml.Serializer.Utils;
+using UnityEditor;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Poctoscript))]
 public class Stromoscript : MonoBehaviour {
     private Animator _animator;
     private bool _moznoSekat = false;
@@ -18,19 +20,20 @@ public class Stromoscript : MonoBehaviour {
     public PolarCoord PolarStromu;
     public PolarCoord PolarHrace;
     private Poctoscript _poctoscript;
+    private SpriteRenderer _spriteRenderer;
+    private Sprite _defaultniStrom;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         _animator = GetComponent<Animator>();
-        _sounds = new List<AudioClip> { chop1, chop2, chop3 };
-	    _poctoscript = GetComponent<Poctoscript>();
-	}
+        _sounds = new List<AudioClip> {chop1, chop2, chop3};
+        _poctoscript = GetComponent<Poctoscript>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _defaultniStrom = _spriteRenderer.sprite;
+    }
 
-    private void Update()
-    {
-
-        if (_hrac != null && _moznoSekat)
-        {
+    private void Update() {
+        if (_hrac != null && _moznoSekat) {
             var u = transform.localPosition;
             var v = _hrac.transform.localPosition;
 
@@ -38,24 +41,28 @@ public class Stromoscript : MonoBehaviour {
 
             _hrac.GetComponent<SpriteRenderer>().flipX = det > 0;
         }
+
+        if (_poctoscript && _poctoscript.Kapacita > 0) {
+            _animator.enabled = true;
+            _spriteRenderer.sprite = _defaultniStrom;
+        } else {
+            _animator.enabled = false;
+            _spriteRenderer.sprite = Resources.Load<Sprite>("Sprity/suchy parez");
+        }
     }
 
     // Kdyz se trigne kolize (s hracem)
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnTriggerEnter2D(Collider2D collision) {
         _hrac = collision.gameObject;
         _hrac.GetComponent<PlayerController>().NastavCil(this.gameObject);
         _moznoSekat = true;
     }
 
-    public void Seknuto()
-    {
-        if (_moznoSekat)
-        {
+    public void Seknuto() {
+        if (_moznoSekat) {
             // Zruseni napovedy pro sekani
             var napoveda = GetComponentInChildren<Napovedascript>();
-            if (napoveda != null)
-            {
+            if (napoveda != null) {
                 Destroy(napoveda.gameObject);
             }
 
@@ -68,17 +75,30 @@ public class Stromoscript : MonoBehaviour {
 
             GameState.Instance.AudioManager.ZahrajZvuk(sound);
         }
-
-        if (   _poctoscript.Kapacita <= 0) {
-            Destroy(gameObject);
-        }
     }
 
     // Kdyz se trigne kolize (s hracem)
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        _hrac.GetComponent<PlayerController>().ZrusCil();
-        _hrac = null;
-        _moznoSekat = false;
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (_hrac) {
+            _hrac.GetComponent<PlayerController>().ZrusCil();
+            _hrac = null;
+            _moznoSekat = false;
+        }
+    }
+
+    public void OnDrawGizmos() {
+        if (_poctoscript) {
+            var style = new GUIStyle();
+            style.normal.textColor = Color.white;
+            style.fontSize = 20;
+            Handles.Label(transform.position, string.Format("{0}", _poctoscript.Kapacita), style);
+        }
+
+        if (_moznoSekat) {
+            Handles.color = Color.green;
+        } else {
+            Handles.color = Color.red;
+        }
+        Handles.DrawSolidDisc(transform.position, Vector3.back, 0.03f);
     }
 }
