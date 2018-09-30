@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Poctoscript))]
 public class Keroscript : MonoBehaviour {
     private Animator _animator;
     private bool _moznoTrhat = false;
@@ -12,11 +14,17 @@ public class Keroscript : MonoBehaviour {
     private List<AudioClip> _sounds;
     private GameObject _hrac;
     public bool _otrhano = false;
+    private Poctoscript _poctoscript;
+    private SpriteRenderer _spriteRenderer;
+    private Sprite _defaultniKer;
 
     // Use this for initialization
     void Start() {
         _animator = GetComponent<Animator>();
         _sounds = new List<AudioClip> {trh1, trh2, trh3};
+        _poctoscript = GetComponent<Poctoscript>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _defaultniKer = _spriteRenderer.sprite;
     }
 
     private void Update() {
@@ -27,6 +35,17 @@ public class Keroscript : MonoBehaviour {
             float det = u.x * v.y - v.x * u.y;
 
             _hrac.GetComponent<SpriteRenderer>().flipX = det > 0;
+        }
+
+        if (_poctoscript && _poctoscript.Kapacita > 0 && !_otrhano)
+        {
+            _animator.enabled = true;
+            _spriteRenderer.sprite = _defaultniKer;
+        }
+        else
+        {
+            _animator.enabled = false;
+            _spriteRenderer.sprite = Resources.Load<Sprite>("Sprity/ker_2");
         }
     }
 
@@ -39,8 +58,8 @@ public class Keroscript : MonoBehaviour {
         }
 
         if (_moznoTrhat && !_otrhano) {
-            GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Boruvka, 5);
-
+            GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Boruvka, _poctoscript.Kapacita);
+            _poctoscript.Kapacita = 0;
             _animator.SetTrigger("Trhani");
             var rnd = new System.Random();
             int index = rnd.Next(_sounds.Count - 1);
