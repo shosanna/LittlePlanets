@@ -6,6 +6,7 @@ using Coords;
 using Assets.Scripty;
 using Pada1.Xml.Serializer.Utils;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Poctoscript))]
@@ -18,7 +19,6 @@ public class Stromoscript : MonoBehaviour {
     private List<AudioClip> _sounds;
     private GameObject _hrac;
     public PolarCoord PolarStromu;
-    public PolarCoord PolarHrace;
     private Poctoscript _poctoscript;
     private SpriteRenderer _spriteRenderer;
     private Sprite _defaultniStrom;
@@ -30,9 +30,12 @@ public class Stromoscript : MonoBehaviour {
         _poctoscript = GetComponent<Poctoscript>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultniStrom = _spriteRenderer.sprite;
+        PolarStromu = new CartesianCoord(transform.position.x, transform.position.y).ToPolar();
     }
 
     private void Update() {
+        transform.position = PolarStromu.ToCartesian().ToVector3();
+
         if (_hrac != null && _moznoSekat) {
             var u = transform.localPosition;
             var v = _hrac.transform.localPosition;
@@ -46,8 +49,14 @@ public class Stromoscript : MonoBehaviour {
             _animator.enabled = true;
             _spriteRenderer.sprite = _defaultniStrom;
         } else {
+            ZrusNapovedu();
             _animator.enabled = false;
             _spriteRenderer.sprite = Resources.Load<Sprite>("Sprity/suchy parez");
+
+            // TODO: FUJ! Oprava pro moc velkou planetu
+            if (SceneManager.GetActiveScene().name == "planet3") {
+                PolarStromu.R = 1.22f;
+            }
         }
     }
 
@@ -60,11 +69,7 @@ public class Stromoscript : MonoBehaviour {
 
     public void Seknuto() {
         if (_moznoSekat) {
-            // Zruseni napovedy pro sekani
-            var napoveda = GetComponentInChildren<Napovedascript>();
-            if (napoveda != null) {
-                Destroy(napoveda.gameObject);
-            }
+            ZrusNapovedu();
 
             GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Drevo, 1);
             _poctoscript.Kapacita--;
@@ -74,6 +79,14 @@ public class Stromoscript : MonoBehaviour {
             var sound = _sounds[index];
 
             GameState.Instance.AudioManager.ZahrajZvuk(sound);
+        }
+    }
+
+    private void ZrusNapovedu() {
+        var napoveda = GetComponentInChildren<Napovedascript>();
+        if (napoveda != null)
+        {
+            Destroy(napoveda.gameObject);
         }
     }
 

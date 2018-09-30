@@ -8,8 +8,4 @@ using UnityEngine.SceneManagement;
 public class Poctoscript : MonoBehaviour {
     public int Index;
     public int Kapacita;
-
-    void Start() {
-        Kapacita = 3;
-    }
 }
