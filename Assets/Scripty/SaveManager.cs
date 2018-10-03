@@ -21,9 +21,11 @@ namespace Assets.Scripty {
             Inventar inv = GameState.Instance.Inventar;
             data.PocetBoruvek = inv.ZiskejPocet(Materialy.Boruvka);
             data.PocetDreva = inv.ZiskejPocet(Materialy.Drevo);
+            data.PocetKyti = inv.ZiskejPocet(Materialy.Slunecnice);
 
             bf.Serialize(file, data);
             file.Close();
+            SavePlanet(data.Planeta);
         }
 
         public static void Load() {
@@ -41,6 +43,22 @@ namespace Assets.Scripty {
                 inv.Vynuluj();
                 inv.PridejDoVolnehoSlotu(Materialy.Boruvka, data.PocetBoruvek);
                 inv.PridejDoVolnehoSlotu(Materialy.Drevo, data.PocetDreva);
+                inv.PridejDoVolnehoSlotu(Materialy.Slunecnice, data.PocetKyti);
+
+                foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
+                {
+                    if (scene.enabled)
+                    {
+                        string name = scene.path.Substring(scene.path.LastIndexOf('/') + 1);
+                        name = name.Substring(0, name.Length - 6);
+
+                        if (File.Exists(Application.persistentDataPath + "/" + name + ".dat"))
+                        {
+                            Debug.Log("Loading: " + name);
+                            LoadPlanet(name);
+                        }
+                    }
+                }
 
                 SceneManager.LoadScene(data.Planeta);
             }
@@ -163,6 +181,7 @@ namespace Assets.Scripty {
         public bool RunTutorial;
         public int PocetDreva;
         public int PocetBoruvek;
+        public int PocetKyti;
         public string Planeta;
         public int Den;
     }

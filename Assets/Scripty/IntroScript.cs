@@ -5,12 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class IntroScript : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	    SaveManager.VycistiPlanety();
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		
@@ -22,6 +16,7 @@ public class IntroScript : MonoBehaviour {
             GameState.Instance.AudioManager.ZmenHudbu();
             GameState.Instance.AudioManager.PustHudbu();
             GameState.Instance.RunTutorial = true;
+            SaveManager.VycistiPlanety();
             SceneManager.LoadScene("planet1");
         }
 
