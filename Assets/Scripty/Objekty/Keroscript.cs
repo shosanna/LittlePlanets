@@ -45,18 +45,14 @@ public class Keroscript : MonoBehaviour {
         else
         {
             _animator.enabled = false;
-            _spriteRenderer.sprite = Resources.Load<Sprite>("Sprity/ker_2");
+            _spriteRenderer.sprite = Resources.Load<Sprite>("Sprity/otrhano");
+            _otrhano = true;
+            ZrusNapovedu();
         }
     }
 
     public void Trhani() {
-        // Zruseni napovedy pro sekani
-        var napoveda = GetComponentInChildren<Napovedascript>();
-        if (napoveda != null)
-        {
-            Destroy(napoveda.gameObject);
-        }
-
+        ZrusNapovedu();
         if (_moznoTrhat && !_otrhano) {
             GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Boruvka, _poctoscript.Kapacita);
             _poctoscript.Kapacita = 0;
@@ -72,6 +68,16 @@ public class Keroscript : MonoBehaviour {
             Debug.Log(string.Format("Neni mozno - moznotrhat #{0}, otrhano #{1}", _moznoTrhat, _otrhano));
         }
     }
+
+    private void ZrusNapovedu()
+    {
+        var napoveda = GetComponentInChildren<Napovedascript>();
+        if (napoveda != null)
+        {
+            Destroy(napoveda.gameObject);
+        }
+    }
+
 
     // Kdyz se trigne kolize (s hracem)
     private void OnTriggerEnter2D(Collider2D collision) {

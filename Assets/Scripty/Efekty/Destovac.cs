@@ -20,7 +20,7 @@ public class Destovac : MonoBehaviour {
     }
 
     private void Start() {
-        if (!_prsi)
+        if (!_prsi && GameState.Instance.AudioManager != null)
         {
             GameState.Instance.AudioManager.ZmenEfektNaDefault();
             GameState.Instance.AudioManager.PustEfekt();

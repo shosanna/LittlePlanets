@@ -33,6 +33,8 @@ public class Branosystem : MonoBehaviour {
             GameState.Instance.BranaUspesneVytocena = true;
             brana.ResetniKnihu();
             GameState.Instance.AudioManager.ZahrajZvuk(ZvukUspech);
+            GameState.Instance.AudioManager.ZmenHudbu();
+            GameState.Instance.AudioManager.PustHudbu();
 
             SaveManager.SavePlanet(SceneManager.GetActiveScene().name);
             Application.LoadLevel(_adresy[adresa]);
