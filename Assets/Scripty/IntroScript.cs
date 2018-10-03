@@ -11,7 +11,6 @@ public class IntroScript : MonoBehaviour {
 	}
 
     void OnGUI() {
-
         if (GUI.Button(new Rect(350, 560, 100, 30), "New Game")) {
             GameState.Instance.AudioManager.ZmenHudbu();
             GameState.Instance.AudioManager.PustHudbu();
