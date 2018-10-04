@@ -41,10 +41,22 @@ namespace Assets.Scripty {
 
                 Inventar inv = GameState.Instance.Inventar;
                 inv.Vynuluj();
-                inv.PridejDoVolnehoSlotu(Materialy.Boruvka, data.PocetBoruvek);
-                inv.PridejDoVolnehoSlotu(Materialy.Drevo, data.PocetDreva);
-                inv.PridejDoVolnehoSlotu(Materialy.Slunecnice, data.PocetKyti);
 
+                if(data.PocetDreva > 0)
+                {
+                    inv.PridejDoVolnehoSlotu(Materialy.Drevo, data.PocetDreva);
+                }
+
+                if(data.PocetBoruvek > 0)
+                {
+                    inv.PridejDoVolnehoSlotu(Materialy.Boruvka, data.PocetBoruvek);
+                }
+
+                if(data.PocetKyti > 0)
+                {
+                    inv.PridejDoVolnehoSlotu(Materialy.Slunecnice, data.PocetKyti);
+                }
+                
                 foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
                 {
                     if (scene.enabled)
