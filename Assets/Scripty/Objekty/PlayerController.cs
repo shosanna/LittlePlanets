@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     public float speed = 5;
     public PolarCoord PolarCoord;
     private GameObject _cilAkce;
+    private SpriteRenderer _renderer;
 
     private bool _isGrounded = true;
 
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         _anim = GetComponent<Animator>();
+        _renderer = GetComponent<SpriteRenderer>();
         origCamera = Camera.main.transform;
     }
 
@@ -42,10 +44,10 @@ public class PlayerController : MonoBehaviour {
         // pohyb
         var movement = Input.GetAxisRaw("Horizontal");
         if (movement == 1) {
-            //_renderer.flipX = false;
+            _renderer.flipX = false;
             _anim.SetBool("isMoving", true);
         } else if (movement == -1) {
-            //_renderer.flipX = true;
+            _renderer.flipX = true;
             _anim.SetBool("isMoving", true);
         } else {
             _anim.SetBool("isMoving", false);
@@ -79,7 +81,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKey(KeyCode.LeftShift)) {
             speed = 3;
         } else {
-            speed = 5;
+            speed = 10;
         }
 
         PolarCoord.R += yVelocity * Time.deltaTime;

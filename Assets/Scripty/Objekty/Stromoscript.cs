@@ -35,8 +35,8 @@ public class Stromoscript : MonoBehaviour {
 
     private void Update() {
         transform.position = PolarStromu.ToCartesian().ToVector3();
-
-        if (_hrac != null && _moznoSekat) {
+            
+        if (_hrac != null && _moznoSekat && !_hrac.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("MainCharacterMovement")) {
             var u = transform.localPosition;
             var v = _hrac.transform.localPosition;
 
