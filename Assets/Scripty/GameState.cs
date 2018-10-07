@@ -48,11 +48,14 @@ public class GameState : MonoBehaviour {
             Destroy(this.gameObject);
 
             // Znic take vsechny napovedy - maji byt jen jednou
-            var napovedy = GameObject.FindGameObjectsWithTag("Napoveda");
-
-            foreach (var napoveda in napovedy) {
-                Destroy(napoveda);
+            if (_instance.RunTutorial == false) {
+                var napovedy = GameObject.FindGameObjectsWithTag("Napoveda");
+                foreach (var napoveda in napovedy)
+                {
+                    Destroy(napoveda);
+                }
             }
+
             return;
         } else {
             _instance = this;

@@ -20,6 +20,5 @@ public class HejbatkoDekoraceScript : MonoBehaviour {
     {
         Direction = -Direction;
         transform.localPosition = new Vector3(transform.localPosition.x, Random.Range(-1f, 1f), transform.localPosition.z);
-        Debug.Log("KOLIZE");
     }
 }
