@@ -28,15 +28,6 @@ public class Keroscript : MonoBehaviour {
     }
 
     private void Update() {
-        if (_hrac != null && _moznoTrhat) {
-            var u = transform.localPosition;
-            var v = _hrac.transform.localPosition;
-
-            float det = u.x * v.y - v.x * u.y;
-
-            _hrac.GetComponent<SpriteRenderer>().flipX = det > 0;
-        }
-
         if (_poctoscript && _poctoscript.Kapacita > 0 && !_otrhano)
         {
             _animator.enabled = true;
@@ -54,6 +45,18 @@ public class Keroscript : MonoBehaviour {
     public void Trhani() {
         ZrusNapovedu();
         if (_moznoTrhat && !_otrhano) {
+            // otoceni hrace aby trhal na spravnou stranu
+            if (_hrac != null && _moznoTrhat)
+            {
+                var u = transform.localPosition;
+                var v = _hrac.transform.localPosition;
+
+                float det = u.x * v.y - v.x * u.y;
+
+                _hrac.GetComponent<SpriteRenderer>().flipX = det > 0;
+            }
+
+            
             GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Boruvka, _poctoscript.Kapacita);
             _poctoscript.Kapacita = 0;
             _animator.SetTrigger("Trhani");

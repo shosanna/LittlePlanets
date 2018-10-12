@@ -36,15 +36,6 @@ public class Stromoscript : MonoBehaviour {
     private void Update() {
         transform.position = PolarStromu.ToCartesian().ToVector3();
             
-        if (_hrac != null && _moznoSekat && !_hrac.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("MainCharacterMovement")) {
-            var u = transform.localPosition;
-            var v = _hrac.transform.localPosition;
-
-            float det = u.x * v.y - v.x * u.y;
-
-            _hrac.GetComponent<SpriteRenderer>().flipX = det > 0;
-        }
-
         if (_poctoscript && _poctoscript.Kapacita > 0) {
             _animator.enabled = true;
             _spriteRenderer.sprite = _defaultniStrom;
@@ -70,6 +61,18 @@ public class Stromoscript : MonoBehaviour {
     public void Seknuto() {
         if (_moznoSekat) {
             ZrusNapovedu();
+
+            // otoceni hrace pri sekani (aby sekal do spravne strany)
+            if (_hrac != null && _moznoSekat)
+            {
+                var u = transform.localPosition;
+                var v = _hrac.transform.localPosition;
+
+                float det = u.x * v.y - v.x * u.y;
+
+                _hrac.GetComponent<SpriteRenderer>().flipX = det > 0;
+            }
+
 
             GameState.Instance.Inventar.PridejDoVolnehoSlotu(Materialy.Drevo, 1);
             _poctoscript.Kapacita--;
