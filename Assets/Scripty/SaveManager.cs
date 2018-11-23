@@ -56,7 +56,7 @@ namespace Assets.Scripty {
                 {
                     inv.PridejDoVolnehoSlotu(Materialy.Slunecnice, data.PocetKyti);
                 }
-                
+#if UNITY_EDITOR
                 foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
                 {
                     if (scene.enabled)
@@ -71,7 +71,7 @@ namespace Assets.Scripty {
                         }
                     }
                 }
-
+#endif
                 SceneManager.LoadScene(data.Planeta);
             }
         }
@@ -172,17 +172,22 @@ namespace Assets.Scripty {
 
         internal static void VycistiPlanety()
         {
-            foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes) {
-                if (scene.enabled) {
+#if UNITY_EDITOR
+            foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
+            {
+                if (scene.enabled)
+                {
                     string name = scene.path.Substring(scene.path.LastIndexOf('/') + 1);
                     name = name.Substring(0, name.Length - 6);
 
-                    if (File.Exists(Application.persistentDataPath + "/" + name + ".dat")) {
+                    if (File.Exists(Application.persistentDataPath + "/" + name + ".dat"))
+                    {
                         File.Delete(Application.persistentDataPath + "/" + name + ".dat");
                         Debug.Log("Smazan soubor pro planetu: " + name);
                     }
                 }
             }
+#endif
         }
     }
 

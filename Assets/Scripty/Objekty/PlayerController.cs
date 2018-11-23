@@ -112,10 +112,11 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-
+#if UNITY_EDITOR
     void OnDrawGizmos() {
         Gizmos.DrawWireSphere(transform.parent.transform.position, Radius);
     }
+#endif
 
     // Je volano na konci animace
     public void Seknuto() {

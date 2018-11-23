@@ -11,8 +11,8 @@ public class Planetascript : MonoBehaviour {
     public Transform PodvodoPrefab;
     public bool PovolitPodvod = true;
     private GameObject _rucickaCasovace;
-    private float _horniMezRucicky = 371f;
-    private float _dolniMezRucicky = 244f;
+    private float _horniMezRucicky;
+    private float _dolniMezRucicky;
     private float _rozsahRucicky;
 
     private Destovac _destovac;
@@ -41,6 +41,8 @@ public class Planetascript : MonoBehaviour {
 
         // Inicializace
         _rucickaCasovace = GameObject.FindGameObjectWithTag("RucickaCasovace");
+        _horniMezRucicky = GameObject.FindGameObjectWithTag("HorniMez").transform.localPosition.y;
+        _dolniMezRucicky = GameObject.FindGameObjectWithTag("DolniMez").transform.localPosition.y;
         _rozsahRucicky = _horniMezRucicky - _dolniMezRucicky;
 
         // Prseni

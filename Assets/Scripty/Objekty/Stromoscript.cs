@@ -102,6 +102,7 @@ public class Stromoscript : MonoBehaviour {
         }
     }
 
+#if UNITY_EDITOR
     public void OnDrawGizmos() {
         if (_poctoscript) {
             var style = new GUIStyle();
@@ -117,4 +118,5 @@ public class Stromoscript : MonoBehaviour {
         }
         Handles.DrawSolidDisc(transform.position, Vector3.back, 0.03f);
     }
+#endif
 }

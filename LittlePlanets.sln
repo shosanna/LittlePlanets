@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio for Mac
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittlePlanets", "Assembly-CSharp.csproj", "{6378F333-2DAB-E61C-1E04-D98FF8521DD5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittlePlanets", "Assembly-CSharp-Editor.csproj", "{2D5986E9-83CE-23A9-395F-EE581255402C}"
