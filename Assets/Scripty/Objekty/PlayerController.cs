@@ -55,6 +55,21 @@ public class PlayerController : MonoBehaviour {
 
         yVelocity -= 5 * Time.deltaTime;
 
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.position.x < Screen.width / 2)
+            {
+                _renderer.flipX = false;
+                _anim.SetBool("isMoving", true);
+                movement = 1;
+            }
+            else if (touch.position.x > Screen.width / 2)
+            {
+                _renderer.flipX = true;
+                _anim.SetBool("isMoving", true);
+                movement = -1;
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded) {
             yVelocity = 1;
@@ -64,6 +79,38 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null) {
             if (_cilAkce.GetComponent<Poctoscript>().Kapacita > 0) {
                 _anim.SetTrigger("Chop"); // na konci animace se vola Seknuto()
+            }
+        }
+
+        // klikani mysi / touch na strom
+        if (Input.GetMouseButtonDown(0) && _cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null)
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
+
+            // Pokud se kliknulo na cil akce 
+            if (hitCollider != null && hitCollider.gameObject == _cilAkce.gameObject)
+            {
+                if (_cilAkce.GetComponent<Poctoscript>().Kapacita > 0)
+                {
+                    _anim.SetTrigger("Chop"); // na konci animace se vola Seknuto()
+                }
+            }
+        }
+
+        // klikani mysi / touch na boruvky
+        if (Input.GetMouseButtonDown(0) && _cilAkce != null && _cilAkce.GetComponent<Keroscript>() != null)
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
+
+            // Pokud se kliknulo na cil akce 
+            if (hitCollider != null && hitCollider.gameObject == _cilAkce.gameObject)
+            {
+                if (_cilAkce.GetComponent<Poctoscript>().Kapacita > 0)
+                {
+                    _anim.SetTrigger("Trhej"); // na konci animace se vola Seknuto()
+                }
             }
         }
 
