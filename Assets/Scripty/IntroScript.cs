@@ -11,7 +11,11 @@ public class IntroScript : MonoBehaviour {
 	}
 
     void OnGUI() {
-        if (GUI.Button(new Rect(350, 560, 100, 30), "New Game")) {
+        GUIStyle style = new GUIStyle();
+        style.fontSize = 36;
+        style.fontStyle = FontStyle.Bold;
+
+        if (GUI.Button(new Rect(350, 400, 300, 90), "New Game", style)) {
             GameState.Instance.AudioManager.ZmenHudbu();
             GameState.Instance.AudioManager.PustHudbu();
             GameState.Instance.RunTutorial = true;
@@ -19,7 +23,7 @@ public class IntroScript : MonoBehaviour {
             SceneManager.LoadScene("planet1");
         }
 
-        if (GUI.Button(new Rect(350, 600, 100, 30), "Load Game")) {
+        if (GUI.Button(new Rect(690, 400, 300, 90), "Load Game", style)) {
             GameState.Instance.AudioManager.ZmenHudbu();
             GameState.Instance.AudioManager.PustHudbu();
             SaveManager.Load();
