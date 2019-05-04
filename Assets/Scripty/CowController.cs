@@ -4,18 +4,35 @@ using Coords;
 using UnityEngine;
 
 public class CowController : MonoBehaviour {
-    public PolarCoord _polarCoord;
+    public PolarCoord PolarCoord;
+    private Animator _napovedaAnimator;
 
     void Start () {
         // Radius of the planet
-        _polarCoord.R = 0.64f;
+        PolarCoord.R = 0.64f;
+        _napovedaAnimator = transform.Find("NapovedaNeedPapik").GetComponent<Animator>();
     }
 	
 	void Update () {
-	    _polarCoord.Phi += 0.007f;
+	    PolarCoord.Phi += 0.007f;
 
-        transform.localPosition = _polarCoord.ToCartesian().ToVector3();
+        transform.localPosition = PolarCoord.ToCartesian().ToVector3();
 	    // nataceni spritu
-	    transform.rotation = Quaternion.EulerRotation(0, 0, _polarCoord.Phi - Mathf.PI / 2);
+	    transform.rotation = Quaternion.EulerRotation(0, 0, PolarCoord.Phi - Mathf.PI / 2);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "postava" && _napovedaAnimator) {
+            _napovedaAnimator.SetBool("NeedPapik", true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "postava" && _napovedaAnimator)
+        {
+            _napovedaAnimator.SetBool("NeedPapik", false);
+        }
     }
 }
